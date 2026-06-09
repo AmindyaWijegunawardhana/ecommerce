@@ -3,6 +3,9 @@ import axios from 'axios';
 import { Plus, Edit2, Trash2, X, Star, AlertCircle, Sparkles, Image as ImageIcon, Gift } from 'lucide-react';
 import { ToastContext } from '../context/ToastContext';
 
+// Get API URL from environment variable
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+
 const AdminProducts = () => {
   const { addToast } = useContext(ToastContext);
 
@@ -32,8 +35,8 @@ const AdminProducts = () => {
     try {
       setLoading(true);
       const [productsRes, categoriesRes] = await Promise.all([
-        axios.get('/api/products'),
-        axios.get('/api/categories')
+        axios.get(`${API_URL}/api/products`),
+        axios.get(`${API_URL}/api/categories`)
       ]);
       setProducts(productsRes.data);
       setCategories(categoriesRes.data);
@@ -124,12 +127,12 @@ const AdminProducts = () => {
           formData.append('existingImages', img);
         });
 
-        await axios.put(`/api/products/${editingProduct._id}`, formData, {
+        await axios.put(`${API_URL}/api/products/${editingProduct._id}`, formData, {
           headers: { 'Content-Type': 'multipart/form-data' }
         });
         addToast('Product updated successfully', 'success');
       } else {
-        await axios.post('/api/products', formData, {
+        await axios.post(`${API_URL}/api/products`, formData, {
           headers: { 'Content-Type': 'multipart/form-data' }
         });
         addToast('Product created successfully', 'success');
@@ -146,7 +149,7 @@ const AdminProducts = () => {
   const handleDelete = async (id, productName) => {
     if (window.confirm(`Are you sure you want to delete "${productName}"?`)) {
       try {
-        await axios.delete(`/api/products/${id}`);
+        await axios.delete(`${API_URL}/api/products/${id}`);
         addToast('Product deleted successfully', 'success');
         loadData();
       } catch (err) {

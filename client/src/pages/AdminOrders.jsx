@@ -3,6 +3,9 @@ import axios from 'axios';
 import { ShoppingBag, Eye, X, Mail, Phone, MapPin, CheckCircle, Calendar, AlertCircle } from 'lucide-react';
 import { ToastContext } from '../context/ToastContext';
 
+// Get API URL from environment variable
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+
 const AdminOrders = () => {
   const { addToast } = useContext(ToastContext);
 
@@ -16,7 +19,7 @@ const AdminOrders = () => {
   const loadOrders = async () => {
     try {
       setLoading(true);
-      const res = await axios.get('/api/orders');
+      const res = await axios.get(`${API_URL}/api/orders`);
       setOrders(res.data);
       setError('');
     } catch (err) {

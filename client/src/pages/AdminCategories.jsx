@@ -2,7 +2,8 @@ import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import { Plus, Edit2, Trash2, X, AlertCircle, Tags } from 'lucide-react';
 import { ToastContext } from '../context/ToastContext';
-
+// Get API URL from environment variable
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
 const AdminCategories = () => {
   const { addToast } = useContext(ToastContext);
 
@@ -20,7 +21,7 @@ const AdminCategories = () => {
   const loadCategories = async () => {
     try {
       setLoading(true);
-      const res = await axios.get('/api/categories');
+      const res = await axios.get(`${API_URL}/api/categories`);
       setCategories(res.data);
       setError('');
     } catch (err) {
@@ -64,10 +65,10 @@ const AdminCategories = () => {
       };
 
       if (editingCategory) {
-        await axios.put(`/api/categories/${editingCategory._id}`, payload);
+        await axios.put(`${API_URL}/api/categories/${editingCategory._id}`, payload);
         addToast('Category updated successfully', 'success');
       } else {
-        await axios.post('/api/categories', payload);
+        await axios.post(`${API_URL}/api/categories`, payload);
         addToast('Category created successfully', 'success');
       }
 
@@ -82,7 +83,7 @@ const AdminCategories = () => {
   const handleDelete = async (id, catName) => {
     if (window.confirm(`Are you sure you want to delete category "${catName}"?`)) {
       try {
-        await axios.delete(`/api/categories/${id}`);
+        await axios.delete(`${API_URL}/api/categories/${id}`);
         addToast('Category deleted successfully', 'success');
         loadCategories();
       } catch (err) {

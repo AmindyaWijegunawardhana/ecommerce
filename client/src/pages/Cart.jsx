@@ -6,6 +6,9 @@ import { CartContext } from '../context/CartContext';
 import { SettingsContext } from '../context/SettingsContext';
 import { ToastContext } from '../context/ToastContext';
 
+// Get API URL from environment variable
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+
 const Cart = () => {
   const {
     cartItems,
@@ -67,7 +70,7 @@ const Cart = () => {
       };
 
       // 2. Save order to MongoDB database
-      const response = await axios.post('/api/orders', orderPayload);
+      const response = await axios.post(`${API_URL}/api/orders`, orderPayload);
       const savedOrder = response.data;
       
       addToast('Order saved! Redirecting to WhatsApp...', 'success');

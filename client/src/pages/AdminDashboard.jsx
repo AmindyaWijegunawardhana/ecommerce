@@ -12,6 +12,9 @@ import {
   AlertCircle
 } from 'lucide-react';
 
+// Get API URL from environment variable
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+
 const AdminDashboard = () => {
   const [stats, setStats] = useState(null);
   const [recentOrders, setRecentOrders] = useState([]);
@@ -22,8 +25,8 @@ const AdminDashboard = () => {
     try {
       setLoading(true);
       const [statsRes, ordersRes] = await Promise.all([
-        axios.get('/api/orders/stats'),
-        axios.get('/api/orders')
+        axios.get(`${API_URL}/api/orders/stats`),
+        axios.get(`${API_URL}/api/orders`)
       ]);
       setStats(statsRes.data);
       setRecentOrders(ordersRes.data.slice(0, 5)); // Show only top 5 recent orders
@@ -186,7 +189,10 @@ const AdminDashboard = () => {
                       <p class="text-xs text-slate-500 mt-0.5">{order.phoneNumber}</p>
                     </td>
                     <td class="p-5 max-w-[240px] truncate">
-                      {order.items.map(i => `${i.name} (x${i.quantity})`).join(', ')}
+                      {order.items && Array.isArray(order.items) 
+                        ? order.items.map(i => `${i.name} (x${i.quantity})`).join(', ')
+                        : 'N/A'
+                      }
                     </td>
                     <td class="p-5 font-bold text-white">
                       {formatCurrency(order.grandTotal)}

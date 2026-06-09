@@ -4,6 +4,9 @@ import { Settings, Phone, CreditCard, Lock, Sparkles, AlertCircle } from 'lucide
 import { SettingsContext } from '../context/SettingsContext';
 import { ToastContext } from '../context/ToastContext';
 
+// Get API URL from environment variable
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+
 const AdminSettings = () => {
   const { settings, updateGlobalSettings, refreshSettings } = useContext(SettingsContext);
   const { addToast } = useContext(ToastContext);
@@ -72,7 +75,7 @@ const AdminSettings = () => {
     setIsChangingPassword(true);
 
     try {
-      const res = await axios.put('/api/auth/password', { currentPassword, newPassword });
+      const res = await axios.put(`${API_URL}/api/auth/password`, { currentPassword, newPassword });
       addToast(res.data.message || 'Password updated successfully', 'success');
       
       // Clear forms
