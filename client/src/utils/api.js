@@ -23,4 +23,13 @@ apiClient.interceptors.request.use(
   }
 );
 
+export const resolveImageUrl = (url) => {
+  if (!url) return '';
+  if (url.startsWith('http://') || url.startsWith('https://') || url.startsWith('data:')) {
+    return url;
+  }
+  const baseUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+  return `${baseUrl}${url}`;
+};
+
 export default apiClient;

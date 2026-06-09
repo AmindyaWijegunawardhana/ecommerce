@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import { ShoppingBag, Eye, X, Mail, Phone, MapPin, CheckCircle, Calendar, AlertCircle } from 'lucide-react';
 import { ToastContext } from '../context/ToastContext';
+import { resolveImageUrl } from '../utils/api';
 
 // Get API URL from environment variable
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
@@ -235,7 +236,7 @@ const AdminOrders = () => {
                     <div key={index} class="flex items-center gap-3.5 p-3 rounded-xl bg-slate-950/30 border border-slate-850/40">
                       <div class="w-12 h-12 bg-slate-950 rounded-lg overflow-hidden flex-shrink-0">
                         {item.product?.images?.[0] ? (
-                          <img src={item.product.images[0]} alt={item.name} class="w-full h-full object-cover" />
+                          <img src={resolveImageUrl(item.product.images[0])} alt={item.name} class="w-full h-full object-cover" />
                         ) : (
                           <div class="w-full h-full flex items-center justify-center bg-slate-900 text-[10px] font-bold text-slate-650">GIFT</div>
                         )}

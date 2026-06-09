@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { ShoppingCart, Eye } from 'lucide-react';
 import { CartContext } from '../context/CartContext';
 import { ToastContext } from '../context/ToastContext';
+import { resolveImageUrl } from '../utils/api';
 
 const ProductCard = ({ product }) => {
   const { addToCart } = useContext(CartContext);
@@ -21,7 +22,7 @@ const ProductCard = ({ product }) => {
   };
 
   // Resolve image source
-  const imageSrc = product.images?.[0] || 'https://via.placeholder.com/400x400.png?text=Rashi+Dreamy+Gifts';
+  const imageSrc = resolveImageUrl(product.images?.[0]) || 'https://via.placeholder.com/400x400.png?text=Rashi+Dreamy+Gifts';
 
   return (
     <div class="group relative flex flex-col bg-white rounded-2xl border border-dreamy-lavender-100 shadow-xs hover:shadow-md hover:border-dreamy-pink-200 transition-all duration-300 overflow-hidden">

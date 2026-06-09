@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { Plus, Edit2, Trash2, X, Star, AlertCircle, Sparkles, Image as ImageIcon, Gift } from 'lucide-react';
 import { ToastContext } from '../context/ToastContext';
+import { resolveImageUrl } from '../utils/api';
 
 // Get API URL from environment variable
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
@@ -225,7 +226,7 @@ const AdminProducts = () => {
               {/* Thumbnail Container */}
               <div class="aspect-square bg-slate-950 relative overflow-hidden flex items-center justify-center">
                 {prod.images && prod.images.length > 0 ? (
-                  <img src={prod.images[0]} alt={prod.name} class="w-full h-full object-cover" />
+                  <img src={resolveImageUrl(prod.images[0])} alt={prod.name} class="w-full h-full object-cover" />
                 ) : (
                   <ImageIcon class="w-10 h-10 text-slate-700" />
                 )}
@@ -416,7 +417,7 @@ const AdminProducts = () => {
                     {/* Existing Images */}
                     {existingImages.map((img, idx) => (
                       <div key={`existing-${idx}`} class="aspect-square bg-slate-950 rounded-lg overflow-hidden border border-slate-800 relative group">
-                        <img src={img} alt="Existing product" class="w-full h-full object-cover" />
+                        <img src={resolveImageUrl(img)} alt="Existing product" class="w-full h-full object-cover" />
                         <button
                           type="button"
                           onClick={() => removeExistingImage(img)}

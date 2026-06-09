@@ -4,6 +4,7 @@ import axios from 'axios';
 import { ShoppingCart, Heart, Shield, Check, Info, ArrowLeft, Plus, Minus } from 'lucide-react';
 import { CartContext } from '../context/CartContext';
 import { ToastContext } from '../context/ToastContext';
+import { resolveImageUrl } from '../utils/api';
 
 // Get API URL from environment variable
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
@@ -114,7 +115,7 @@ const ProductDetails = () => {
           {/* Main Large Image Container */}
           <div class="aspect-square bg-slate-50 border border-dreamy-lavender-100 rounded-2xl overflow-hidden shadow-xs relative">
             <img
-              src={selectedImage || 'https://via.placeholder.com/600x600.png?text=Rashi+Dreamy+Gifts'}
+              src={resolveImageUrl(selectedImage) || 'https://via.placeholder.com/600x600.png?text=Rashi+Dreamy+Gifts'}
               alt={product.name}
               class="w-full h-full object-cover"
             />
@@ -138,7 +139,7 @@ const ProductDetails = () => {
                       : 'border-dreamy-lavender-100 hover:border-dreamy-pink-200'
                   }`}
                 >
-                  <img src={img} alt={`Thumbnail ${idx + 1}`} class="w-full h-full object-cover" />
+                  <img src={resolveImageUrl(img)} alt={`Thumbnail ${idx + 1}`} class="w-full h-full object-cover" />
                 </button>
               ))}
             </div>
