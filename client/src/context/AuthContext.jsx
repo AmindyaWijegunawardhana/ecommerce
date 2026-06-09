@@ -3,6 +3,9 @@ import axios from 'axios';
 
 export const AuthContext = createContext();
 
+// Get API URL from environment variable
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+
 export const AuthProvider = ({ children }) => {
   const [admin, setAdmin] = useState(null);
   const [token, setToken] = useState(localStorage.getItem('adminToken') || null);
@@ -15,7 +18,7 @@ export const AuthProvider = ({ children }) => {
       localStorage.setItem('adminToken', token);
       
       // Verify token/fetch profile on mount
-      axios.get('/api/auth/me')
+      axios.get(`${API_URL}/api/auth/me`)
         .then(res => {
           setAdmin(res.data);
           setLoading(false);
@@ -35,7 +38,7 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (username, password) => {
     try {
-      const res = await axios.post('/api/auth/login', { username, password });
+      const res = await axios.post(`${API_URL}/api/auth/login`, { username, password });
       setToken(res.data.token);
       setAdmin({
         _id: res.data._id,
