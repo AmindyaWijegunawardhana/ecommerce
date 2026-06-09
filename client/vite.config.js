@@ -6,6 +6,7 @@ export default defineConfig({
   plugins: [react()],
   server: {
     port: 3000,
+    middlewareMode: false,
     proxy: {
       '/api': {
         target: 'http://localhost:5000',
@@ -16,6 +17,9 @@ export default defineConfig({
         changeOrigin: true,
       }
     }
+  },
+  preview: {
+    port: 3000
   },
   define: {
     __API_URL__: JSON.stringify(process.env.VITE_API_URL || 'http://localhost:5000')
