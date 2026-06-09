@@ -4,6 +4,9 @@ import axios from 'axios';
 import { Search, SlidersHorizontal, X, ArrowUpDown, HelpCircle } from 'lucide-react';
 import ProductCard from '../components/ProductCard';
 
+// Get API URL from environment variable
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+
 const Shop = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   
@@ -26,7 +29,7 @@ const Shop = () => {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const res = await axios.get('/api/categories');
+        const res = await axios.get(`${API_URL}/api/categories`);
         setCategories(res.data);
       } catch (err) {
         console.error('Failed to load categories:', err.message);
@@ -47,7 +50,7 @@ const Shop = () => {
         if (maxPrice) queryParams.set('maxPrice', maxPrice);
         if (featured) queryParams.set('featured', featured);
 
-        const res = await axios.get(`/api/products?${queryParams.toString()}`);
+        const res = await axios.get(`${API_URL}/api/products?${queryParams.toString()}`);
         setProducts(res.data);
       } catch (err) {
         console.error('Failed to load products:', err.message);

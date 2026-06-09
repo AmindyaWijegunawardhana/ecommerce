@@ -5,6 +5,9 @@ import { ShoppingCart, Heart, Shield, Check, Info, ArrowLeft, Plus, Minus } from
 import { CartContext } from '../context/CartContext';
 import { ToastContext } from '../context/ToastContext';
 
+// Get API URL from environment variable
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+
 const ProductDetails = () => {
   const { id } = useParams();
   const { addToCart } = useContext(CartContext);
@@ -21,7 +24,7 @@ const ProductDetails = () => {
     const fetchProduct = async () => {
       setLoading(true);
       try {
-        const res = await axios.get(`/api/products/${id}`);
+        const res = await axios.get(`${API_URL}/api/products/${id}`);
         setProduct(res.data);
         if (res.data.images && res.data.images.length > 0) {
           setSelectedImage(res.data.images[0]);

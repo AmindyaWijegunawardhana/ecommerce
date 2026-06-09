@@ -4,6 +4,9 @@ import axios from 'axios';
 import { Gift, Sparkles, Heart, Clock, Star, ArrowRight } from 'lucide-react';
 import ProductCard from '../components/ProductCard';
 
+// Get API URL from environment variable
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+
 const Home = () => {
   const [featuredProducts, setFeaturedProducts] = useState([]);
   const [categories, setCategories] = useState([]);
@@ -13,8 +16,8 @@ const Home = () => {
     const fetchHomeData = async () => {
       try {
         const [productsRes, categoriesRes] = await Promise.all([
-          axios.get('/api/products?featured=true'),
-          axios.get('/api/categories')
+          axios.get(`${API_URL}/api/products?featured=true`),
+          axios.get(`${API_URL}/api/categories`)
         ]);
         setFeaturedProducts(productsRes.data.slice(0, 4));
         setCategories(categoriesRes.data);

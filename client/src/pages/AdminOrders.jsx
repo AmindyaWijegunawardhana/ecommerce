@@ -36,7 +36,7 @@ const AdminOrders = () => {
 
   const handleStatusChange = async (orderId, newStatus) => {
     try {
-      const res = await axios.put(`/api/orders/${orderId}/status`, { status: newStatus });
+      const res = await axios.put(`${API_URL}/api/orders/${orderId}/status`, { status: newStatus });
       addToast(`Order status updated to ${newStatus}`, 'success');
       
       // Update local state arrays
