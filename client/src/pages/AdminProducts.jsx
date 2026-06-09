@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { Plus, Edit2, Trash2, X, Star, AlertCircle, Sparkles, Image as ImageIcon, Gift } from 'lucide-react';
 import { ToastContext } from '../context/ToastContext';
@@ -336,17 +337,29 @@ const AdminProducts = () => {
               {/* Category selector */}
               <div class="flex flex-col gap-1">
                 <label class="text-[10px] font-bold text-slate-400 uppercase tracking-wide">Category *</label>
-                <select
-                  required
-                  value={category}
-                  onChange={(e) => setCategory(e.target.value)}
-                  class="p-3 bg-slate-950 border border-slate-800 rounded-xl text-sm text-slate-200 focus:outline-none focus:ring-1 focus:ring-dreamy-lavender-500"
-                >
-                  <option value="" disabled>Select category</option>
-                  {categories.map((cat) => (
-                    <option key={cat._id} value={cat._id}>{cat.name}</option>
-                  ))}
-                </select>
+                {categories.length === 0 ? (
+                  <div class="p-3 bg-amber-500/10 border border-amber-500/20 text-amber-400 rounded-xl text-xs flex flex-col gap-1.5">
+                    <p>No categories exist. You must create at least one category before you can add products.</p>
+                    <Link
+                      to="/admin/categories"
+                      class="text-dreamy-lavender-400 hover:text-dreamy-lavender-300 font-bold flex items-center gap-1 mt-0.5"
+                    >
+                      Go to Categories Page &rarr;
+                    </Link>
+                  </div>
+                ) : (
+                  <select
+                    required
+                    value={category}
+                    onChange={(e) => setCategory(e.target.value)}
+                    class="p-3 bg-slate-950 border border-slate-800 rounded-xl text-sm text-slate-200 focus:outline-none focus:ring-1 focus:ring-dreamy-lavender-500"
+                  >
+                    <option value="" disabled>Select category</option>
+                    {categories.map((cat) => (
+                      <option key={cat._id} value={cat._id}>{cat.name}</option>
+                    ))}
+                  </select>
+                )}
               </div>
 
               {/* Description */}
@@ -442,7 +455,8 @@ const AdminProducts = () => {
                 </button>
                 <button
                   type="submit"
-                  class="py-2.5 px-6 rounded-xl bg-dreamy-lavender-600 hover:bg-dreamy-lavender-700 text-white font-semibold text-xs transition-colors"
+                  disabled={!editingProduct && categories.length === 0}
+                  class="py-2.5 px-6 rounded-xl bg-dreamy-lavender-600 hover:bg-dreamy-lavender-700 disabled:opacity-50 disabled:cursor-not-allowed text-white font-semibold text-xs transition-colors"
                 >
                   Save Changes
                 </button>
