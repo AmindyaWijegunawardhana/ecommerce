@@ -20,7 +20,7 @@ const seedData = async () => {
     // 2. Seed Settings
     const settingsExist = await Settings.findOne();
     if (!settingsExist) {
-      const whatsappNumber = process.env.DEFAULT_WHATSAPP || '919876543210';
+      const whatsappNumber = process.env.DEFAULT_WHATSAPP || '94707066217';
       const deliveryCharge = process.env.DEFAULT_DELIVERY_CHARGE || 50;
 
       await Settings.create({
