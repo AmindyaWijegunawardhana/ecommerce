@@ -25,17 +25,17 @@ const About = () => {
 
   return (
     <div className="space-y-16 sm:space-y-24 pb-16">
-      
+
       {/* 1. Brand Story */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-center">
           <div className="space-y-6">
             <span className="text-xs uppercase tracking-widest text-dreamy-lavender-600 font-bold">Our Story</span>
             <h1 className="text-3xl sm:text-5xl font-serif font-bold text-slate-800 leading-tight">
-              Crafting Dreams into <br />
-              <span className="gold-text-gradient italic font-semibold">Memorable Keepsakes</span>
+              Sweet Styles, <br />
+              <span className="gold-text-gradient italic font-semibold">Endless Smiles</span>
             </h1>
-            
+
             <p className="text-sm sm:text-base text-slate-600 leading-relaxed font-light">
               Rashi Dreamy Gifts started with a simple vision: to turn gifting into a beautiful, personalized experience. We believe a gift shouldn't just be an object; it should be a token of emotion, handcrafted and tailored to show how much you care.
             </p>
@@ -43,7 +43,7 @@ const About = () => {
               From hand-picked fancy items and customized ceramic mugs to themed hampers filled with sweet delights, our collections are carefully curated with a touch of elegance and pastel aesthetics that make every delivery feel like a dream.
             </p>
           </div>
-          
+
           <div className="relative bg-gradient-to-tr from-dreamy-pink-50 to-dreamy-lavender-100 rounded-3xl p-8 sm:p-12 border border-dreamy-lavender-100 shadow-xs text-center flex flex-col items-center justify-center min-h-[300px]">
             <div className="w-16 h-16 rounded-full bg-white shadow-xs flex items-center justify-center text-dreamy-lavender-600 mb-6">
               <Gift className="w-8 h-8 animate-bounce" />
@@ -119,7 +119,7 @@ const About = () => {
                 <span>{faq.q}</span>
                 {openFaq === index ? <ChevronUp className="w-5 h-5 text-slate-400" /> : <ChevronDown className="w-5 h-5 text-slate-400" />}
               </button>
-              
+
               {openFaq === index && (
                 <div className="p-5 pt-0 border-t border-slate-50 text-xs sm:text-sm text-slate-500 leading-relaxed font-light animate-fade-in">
                   {faq.a}
