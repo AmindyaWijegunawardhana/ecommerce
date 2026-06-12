@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import { Gift, Sparkles, Heart, Clock, Star, ArrowRight } from 'lucide-react';
+import { Gift, Sparkles, Heart, Clock, ArrowRight } from 'lucide-react';
 import ProductCard from '../components/ProductCard';
 
 // Get API URL from environment variable
@@ -48,27 +48,10 @@ const Home = () => {
     }
   ];
 
-  const testimonials = [
-    {
-      name: 'Aisha Sharma',
-      text: 'The customized combo I ordered for my sister was absolutely beautiful! The lavender colors were so dream-like, and she loved the gold initials.',
-      rating: 5
-    },
-    {
-      name: 'Rahul Varma',
-      text: 'Highly recommend! Ordering through WhatsApp was fast and easy. They sent me pictures of the packaging before shipping.',
-      rating: 5
-    },
-    {
-      name: 'Priya Patel',
-      text: 'Beautiful fancy items and excellent quality. The product details are exactly as shown on the website.',
-      rating: 5
-    }
-  ];
 
   return (
     <div className="space-y-16 sm:space-y-24 pb-16">
-      
+
       {/* 1. Hero Section */}
       <section className="relative overflow-hidden py-16 sm:py-24 bg-gradient-to-tr from-dreamy-pink-100/50 via-dreamy-pink-50/30 to-dreamy-lavender-100/50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -77,16 +60,16 @@ const Home = () => {
               <Sparkles className="w-3.5 h-3.5" />
               Gift Shop & Fancy Items
             </span>
-            
+
             <h1 className="text-4xl sm:text-6xl font-extrabold tracking-tight text-slate-800 leading-[1.15]">
-              Make Every Occasion A <br className="hidden sm:inline" />
+              Rashi Dreamy Gifts <br className="hidden sm:inline" />
               <span className="gold-text-gradient italic">Dreamy Celebration</span>
             </h1>
-            
+
             <p className="text-base sm:text-lg text-slate-600 leading-relaxed max-w-xl mx-auto font-light">
               Explore our collection of custom curated gifts, fancy hampers, and beautiful accessories tailored to convey your deepest sentiments.
             </p>
-            
+
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link
                 to="/shop"
@@ -104,7 +87,7 @@ const Home = () => {
             </div>
           </div>
         </div>
-        
+
         {/* Abstract dreamy blobs in background */}
         <div className="absolute top-1/4 left-10 w-72 h-72 rounded-full bg-dreamy-pink-100 blur-3xl opacity-60 animate-float"></div>
         <div className="absolute bottom-1/4 right-10 w-96 h-96 rounded-full bg-dreamy-lavender-100 blur-3xl opacity-60 animate-float" style={{ animationDelay: '2s' }}></div>
@@ -193,7 +176,7 @@ const Home = () => {
           <span className="text-xs uppercase tracking-widest text-dreamy-lavender-600 font-bold">Core Strengths</span>
           <h2 className="text-2xl sm:text-4xl font-bold text-slate-800 mt-1">Why Choose Us?</h2>
         </div>
-        
+
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {valueProps.map((prop, i) => (
             <div
@@ -206,35 +189,6 @@ const Home = () => {
               <div>
                 <h3 className="font-serif font-bold text-slate-800 text-lg mb-2">{prop.title}</h3>
                 <p className="text-sm text-slate-500 leading-relaxed">{prop.desc}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* 5. Customer Reviews Section */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 bg-gradient-to-br from-dreamy-lavender-50 to-dreamy-pink-50/50 rounded-3xl border border-dreamy-lavender-100">
-        <div className="text-center max-w-xl mx-auto mb-12">
-          <span className="text-xs uppercase tracking-widest text-dreamy-lavender-600 font-bold">Feedback</span>
-          <h2 className="text-2xl sm:text-4xl font-bold text-slate-800 mt-1">Customer Reviews</h2>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {testimonials.map((t, idx) => (
-            <div key={idx} className="p-6 rounded-2xl bg-white shadow-sm border border-white flex flex-col gap-4 relative">
-              <div className="flex items-center gap-1 text-dreamy-gold">
-                {[...Array(t.rating)].map((_, i) => (
-                  <Star key={i} className="w-4 h-4 fill-dreamy-gold" />
-                ))}
-              </div>
-              <p className="text-sm italic text-slate-600 leading-relaxed flex-grow">
-                "{t.text}"
-              </p>
-              <div className="flex items-center gap-3 pt-3 border-t border-slate-50 mt-auto">
-                <div className="w-8 h-8 rounded-full bg-dreamy-pink-100 flex items-center justify-center text-dreamy-lavender-750 font-bold text-xs">
-                  {t.name[0]}
-                </div>
-                <span className="text-sm font-semibold text-slate-800">{t.name}</span>
               </div>
             </div>
           ))}
