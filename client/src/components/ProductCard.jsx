@@ -131,8 +131,12 @@ const ProductCard = ({ product }) => {
 
           {/* Modal box */}
           <div className="relative bg-white rounded-3xl p-6 sm:p-8 max-w-sm w-full text-center shadow-2xl border border-dreamy-lavender-100 animate-fade-in z-10 transform scale-100 transition-all">
-            <div className="w-16 h-16 bg-dreamy-pink-50 rounded-full flex items-center justify-center mx-auto mb-4 text-dreamy-pink-500 shadow-inner">
-              <ShoppingCart className="w-8 h-8" />
+            <div className="w-24 h-24 rounded-2xl overflow-hidden bg-slate-50 border border-dreamy-lavender-100 mx-auto mb-4 shadow-sm">
+              <img 
+                src={imageSrc} 
+                alt={product.name} 
+                className="w-full h-full object-cover" 
+              />
             </div>
 
             <h3 className="font-serif font-bold text-slate-800 text-lg sm:text-xl mb-2">
