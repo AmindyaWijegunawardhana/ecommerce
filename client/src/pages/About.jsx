@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Gift, Heart, Sparkles, Phone, Mail, MapPin, ChevronDown, ChevronUp } from 'lucide-react';
+import aboutLogo from '../assets/background.jpg';
 
 const About = () => {
   const [openFaq, setOpenFaq] = useState(null);
@@ -45,8 +46,12 @@ const About = () => {
           </div>
 
           <div className="relative bg-gradient-to-tr from-dreamy-pink-50 to-dreamy-lavender-100 rounded-3xl p-8 sm:p-12 border border-dreamy-lavender-100 shadow-xs text-center flex flex-col items-center justify-center min-h-[300px]">
-            <div className="w-16 h-16 rounded-full bg-white shadow-xs flex items-center justify-center text-dreamy-lavender-600 mb-6">
-              <Gift className="w-8 h-8 animate-bounce" />
+            <div className="w-20 h-20 rounded-full overflow-hidden bg-white border border-dreamy-lavender-100 shadow-sm mb-6 animate-float">
+              <img 
+                src={aboutLogo} 
+                alt="Rashi Founder Logo" 
+                className="w-full h-full object-cover" 
+              />
             </div>
             <h3 className="font-serif font-bold text-slate-800 text-xl mb-2">Curated for Your Joy</h3>
             <p className="text-xs text-slate-500 max-w-xs leading-relaxed font-light">
