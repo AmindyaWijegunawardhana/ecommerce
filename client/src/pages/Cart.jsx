@@ -5,6 +5,7 @@ import { Trash2, ShoppingBag, Send, Phone, MapPin, User, ArrowRight, Minus, Plus
 import { CartContext } from '../context/CartContext';
 import { SettingsContext } from '../context/SettingsContext';
 import { ToastContext } from '../context/ToastContext';
+import { resolveImageUrl } from '../utils/api';
 
 // Get API URL from environment variable
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
@@ -161,7 +162,7 @@ const Cart = () => {
               {/* Product Thumbnail */}
               <div className="w-20 h-20 rounded-xl overflow-hidden bg-slate-50 border border-slate-100 flex-shrink-0">
                 <img
-                  src={item.image || 'https://via.placeholder.com/150x150.png?text=Gift'}
+                  src={resolveImageUrl(item.image) || 'https://via.placeholder.com/150x150.png?text=Gift'}
                   alt={item.name}
                   className="w-full h-full object-cover"
                 />
