@@ -95,71 +95,71 @@ const AdminCategories = () => {
   };
 
   if (loading && categories.length === 0) {
-    return <div class="text-center text-slate-500 py-20">Loading categories...</div>;
+    return <div className="text-center text-slate-500 py-20">Loading categories...</div>;
   }
 
   return (
-    <div class="space-y-10">
+    <div className="space-y-10">
       
       {/* Title Header */}
-      <div class="flex items-center justify-between">
+      <div className="flex items-center justify-between">
         <div>
-          <h1 class="text-3xl font-serif font-bold text-white tracking-wide">Product Categories</h1>
-          <p class="text-xs text-slate-500 mt-1">Add or edit tags to organize your shop items</p>
+          <h1 className="text-3xl font-serif font-bold text-white tracking-wide">Product Categories</h1>
+          <p className="text-xs text-slate-500 mt-1">Add or edit tags to organize your shop items</p>
         </div>
         <button
           onClick={openAddModal}
-          class="flex items-center gap-1.5 py-2.5 px-5 rounded-xl bg-dreamy-lavender-600 hover:bg-dreamy-lavender-700 text-white font-semibold text-xs shadow-md transition-all cursor-pointer"
+          className="flex items-center gap-1.5 py-2.5 px-5 rounded-xl bg-dreamy-lavender-600 hover:bg-dreamy-lavender-700 text-white font-semibold text-xs shadow-md transition-all cursor-pointer"
         >
-          <Plus class="w-4 h-4" />
+          <Plus className="w-4 h-4" />
           Add Category
         </button>
       </div>
 
       {error && (
-        <div class="flex items-center gap-2.5 p-4 rounded-2xl bg-rose-500/10 border border-rose-500/20 text-rose-350 text-sm">
-          <AlertCircle class="w-5 h-5 flex-shrink-0" />
+        <div className="flex items-center gap-2.5 p-4 rounded-2xl bg-rose-500/10 border border-rose-500/20 text-rose-350 text-sm">
+          <AlertCircle className="w-5 h-5 flex-shrink-0" />
           <p>{error}</p>
         </div>
       )}
 
       {/* Categories table layout */}
-      <div class="bg-slate-900 border border-slate-800 rounded-3xl overflow-hidden shadow-sm">
+      <div className="bg-slate-900 border border-slate-800 rounded-3xl overflow-hidden shadow-sm">
         {categories.length > 0 ? (
-          <table class="w-full text-left border-collapse">
+          <table className="w-full text-left border-collapse">
             <thead>
-              <tr class="bg-slate-950/40 border-b border-slate-800 text-slate-400 text-xs font-semibold uppercase tracking-wider">
-                <th class="p-5">Category Name</th>
-                <th class="p-5">Description</th>
-                <th class="p-5 text-right">Actions</th>
+              <tr className="bg-slate-950/40 border-b border-slate-800 text-slate-400 text-xs font-semibold uppercase tracking-wider">
+                <th className="p-5">Category Name</th>
+                <th className="p-5">Description</th>
+                <th className="p-5 text-right">Actions</th>
               </tr>
             </thead>
-            <tbody class="divide-y divide-slate-800/60 text-sm text-slate-300">
+            <tbody className="divide-y divide-slate-800/60 text-sm text-slate-300">
               {categories.map((cat) => (
-                <tr key={cat._id} class="hover:bg-slate-800/35 transition-colors">
-                  <td class="p-5 font-semibold text-white flex items-center gap-2.5">
-                    <div class="w-8 h-8 rounded-lg bg-dreamy-pink-500/10 text-dreamy-pink-400 flex items-center justify-center">
-                      <Tags class="w-4 h-4" />
+                <tr key={cat._id} className="hover:bg-slate-800/35 transition-colors">
+                  <td className="p-5 font-semibold text-white flex items-center gap-2.5">
+                    <div className="w-8 h-8 rounded-lg bg-dreamy-pink-500/10 text-dreamy-pink-400 flex items-center justify-center">
+                      <Tags className="w-4 h-4" />
                     </div>
                     {cat.name}
                   </td>
-                  <td class="p-5 text-slate-400 max-w-sm truncate">
-                    {cat.description || <span class="italic text-slate-600">No description</span>}
+                  <td className="p-5 text-slate-400 max-w-sm truncate">
+                    {cat.description || <span className="italic text-slate-600">No description</span>}
                   </td>
-                  <td class="p-5 text-right space-x-2">
+                  <td className="p-5 text-right space-x-2">
                     <button
                       onClick={() => openEditModal(cat)}
-                      class="inline-flex items-center justify-center p-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white transition-colors cursor-pointer"
+                      className="inline-flex items-center justify-center p-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white transition-colors cursor-pointer"
                       title="Edit Category"
                     >
-                      <Edit2 class="w-4 h-4" />
+                      <Edit2 className="w-4 h-4" />
                     </button>
                     <button
                       onClick={() => handleDelete(cat._id, cat.name)}
-                      class="inline-flex items-center justify-center p-2 rounded-lg bg-rose-500/10 hover:bg-rose-500 text-rose-450 hover:text-white transition-colors cursor-pointer"
+                      className="inline-flex items-center justify-center p-2 rounded-lg bg-rose-500/10 hover:bg-rose-500 text-rose-450 hover:text-white transition-colors cursor-pointer"
                       title="Delete Category"
                     >
-                      <Trash2 class="w-4 h-4" />
+                      <Trash2 className="w-4 h-4" />
                     </button>
                   </td>
                 </tr>
@@ -167,71 +167,71 @@ const AdminCategories = () => {
             </tbody>
           </table>
         ) : (
-          <div class="text-center py-20">
-            <Tags class="w-12 h-12 text-slate-800 mx-auto mb-4 animate-pulse" />
-            <h3 class="font-serif font-bold text-white text-lg">No Categories Found</h3>
-            <p class="text-slate-500 text-xs mt-1 font-light">Create categories to structure your items.</p>
+          <div className="text-center py-20">
+            <Tags className="w-12 h-12 text-slate-800 mx-auto mb-4 animate-pulse" />
+            <h3 className="font-serif font-bold text-white text-lg">No Categories Found</h3>
+            <p className="text-slate-500 text-xs mt-1 font-light">Create categories to structure your items.</p>
           </div>
         )}
       </div>
 
       {/* ================= EDIT/ADD CATEGORY MODAL ================= */}
       {isModalOpen && (
-        <div class="fixed inset-0 z-50 flex items-center justify-center p-4">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
           {/* Backdrop */}
-          <div onClick={() => setIsModalOpen(false)} class="fixed inset-0 bg-slate-950/70 backdrop-blur-xs"></div>
+          <div onClick={() => setIsModalOpen(false)} className="fixed inset-0 bg-slate-950/70 backdrop-blur-xs"></div>
 
           {/* Modal Container */}
-          <div class="relative w-full max-w-md bg-slate-900 border border-slate-800 rounded-3xl p-6 sm:p-8 z-10 shadow-2xl space-y-6">
+          <div className="relative w-full max-w-md bg-slate-900 border border-slate-800 rounded-3xl p-6 sm:p-8 z-10 shadow-2xl space-y-6">
             
-            <div class="flex items-center justify-between pb-3 border-b border-slate-800">
-              <h3 class="font-serif font-bold text-white text-xl">
+            <div className="flex items-center justify-between pb-3 border-b border-slate-800">
+              <h3 className="font-serif font-bold text-white text-xl">
                 {editingCategory ? 'Edit Category' : 'Create Category'}
               </h3>
-              <button onClick={() => setIsModalOpen(false)} class="p-1 rounded-full bg-slate-800 text-slate-400 hover:text-white">
-                <X class="w-5 h-5" />
+              <button onClick={() => setIsModalOpen(false)} className="p-1 rounded-full bg-slate-800 text-slate-400 hover:text-white">
+                <X className="w-5 h-5" />
               </button>
             </div>
 
-            <form onSubmit={handleSubmit} class="space-y-4">
+            <form onSubmit={handleSubmit} className="space-y-4">
               
               {/* Category Name */}
-              <div class="flex flex-col gap-1">
-                <label class="text-[10px] font-bold text-slate-400 uppercase tracking-wide">Category Name *</label>
+              <div className="flex flex-col gap-1">
+                <label className="text-[10px] font-bold text-slate-400 uppercase tracking-wide">Category Name *</label>
                 <input
                   type="text"
                   required
                   placeholder="e.g. Handmade Mugs"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  class="p-3 bg-slate-950 border border-slate-800 rounded-xl text-sm text-slate-200 placeholder-slate-600 focus:outline-none focus:ring-1 focus:ring-dreamy-lavender-500"
+                  className="p-3 bg-slate-950 border border-slate-800 rounded-xl text-sm text-slate-200 placeholder-slate-600 focus:outline-none focus:ring-1 focus:ring-dreamy-lavender-500"
                 />
               </div>
 
               {/* Description */}
-              <div class="flex flex-col gap-1">
-                <label class="text-[10px] font-bold text-slate-400 uppercase tracking-wide">Description</label>
+              <div className="flex flex-col gap-1">
+                <label className="text-[10px] font-bold text-slate-400 uppercase tracking-wide">Description</label>
                 <textarea
                   rows="3"
                   placeholder="Describe this product category..."
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
-                  class="p-3 bg-slate-950 border border-slate-800 rounded-xl text-sm text-slate-200 placeholder-slate-600 focus:outline-none focus:ring-1 focus:ring-dreamy-lavender-500 resize-none"
+                  className="p-3 bg-slate-950 border border-slate-800 rounded-xl text-sm text-slate-200 placeholder-slate-600 focus:outline-none focus:ring-1 focus:ring-dreamy-lavender-500 resize-none"
                 ></textarea>
               </div>
 
               {/* Action Buttons */}
-              <div class="flex justify-end gap-3 pt-4 border-t border-slate-800 mt-2">
+              <div className="flex justify-end gap-3 pt-4 border-t border-slate-800 mt-2">
                 <button
                   type="button"
                   onClick={() => setIsModalOpen(false)}
-                  class="py-2 px-5 rounded-xl border border-slate-800 text-xs font-semibold text-slate-400 hover:bg-slate-850 hover:text-white"
+                  className="py-2 px-5 rounded-xl border border-slate-800 text-xs font-semibold text-slate-400 hover:bg-slate-850 hover:text-white"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  class="py-2 px-5 rounded-xl bg-dreamy-lavender-600 hover:bg-dreamy-lavender-700 text-white font-semibold text-xs transition-colors"
+                  className="py-2 px-5 rounded-xl bg-dreamy-lavender-600 hover:bg-dreamy-lavender-700 text-white font-semibold text-xs transition-colors"
                 >
                   Save Category
                 </button>

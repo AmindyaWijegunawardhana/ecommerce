@@ -9,7 +9,7 @@ const getSettings = async (req, res) => {
     if (!settings) {
       // Create default if somehow deleted or not initialized
       settings = await Settings.create({
-        whatsappNumber: '919876543210',
+        whatsappNumber: '+94707066217',
         deliveryCharge: 50.0,
       });
     }
@@ -36,7 +36,7 @@ const updateSettings = async (req, res) => {
     } else {
       // Create new settings if not exist
       const newSettings = await Settings.create({
-        whatsappNumber: whatsappNumber || '919876543210',
+        whatsappNumber: whatsappNumber || '+94707066217',
         deliveryCharge: deliveryCharge !== undefined ? Number(deliveryCharge) : 50.0,
       });
       res.json(newSettings);

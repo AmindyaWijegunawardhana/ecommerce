@@ -8,7 +8,7 @@ const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
 
 export const SettingsProvider = ({ children }) => {
   const [settings, setSettings] = useState({
-    whatsappNumber: '94707066217',
+    whatsappNumber: '+94707066217',
     deliveryCharge: 50.0,
   });
   const [loading, setLoading] = useState(true);

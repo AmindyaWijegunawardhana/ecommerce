@@ -166,57 +166,57 @@ const AdminProducts = () => {
   };
 
   if (loading && products.length === 0) {
-    return <div class="text-center text-slate-500 py-20">Loading product catalogs...</div>;
+    return <div className="text-center text-slate-500 py-20">Loading product catalogs...</div>;
   }
 
   return (
-    <div class="space-y-10">
+    <div className="space-y-10">
       
       {/* Title Header */}
-      <div class="flex items-center justify-between">
+      <div className="flex items-center justify-between">
         <div>
-          <h1 class="text-3xl font-serif font-bold text-white tracking-wide">Product Catalog</h1>
-          <p class="text-xs text-slate-500 mt-1">Manage items, stock counts, prices and featured states</p>
+          <h1 className="text-3xl font-serif font-bold text-white tracking-wide">Product Catalog</h1>
+          <p className="text-xs text-slate-500 mt-1">Manage items, stock counts, prices and featured states</p>
         </div>
         <button
           onClick={openAddModal}
-          class="flex items-center gap-1.5 py-2.5 px-5 rounded-xl bg-dreamy-lavender-600 hover:bg-dreamy-lavender-700 text-white font-semibold text-xs shadow-md transition-all cursor-pointer"
+          className="flex items-center gap-1.5 py-2.5 px-5 rounded-xl bg-dreamy-lavender-600 hover:bg-dreamy-lavender-700 text-white font-semibold text-xs shadow-md transition-all cursor-pointer"
         >
-          <Plus class="w-4 h-4" />
+          <Plus className="w-4 h-4" />
           Add Product
         </button>
       </div>
 
       {error && (
-        <div class="flex items-center gap-2.5 p-4 rounded-2xl bg-rose-500/10 border border-rose-500/20 text-rose-350 text-sm">
-          <AlertCircle class="w-5 h-5 flex-shrink-0" />
+        <div className="flex items-center gap-2.5 p-4 rounded-2xl bg-rose-500/10 border border-rose-500/20 text-rose-350 text-sm">
+          <AlertCircle className="w-5 h-5 flex-shrink-0" />
           <p>{error}</p>
         </div>
       )}
 
       {/* Products list grid */}
       {products.length > 0 ? (
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
           {products.map((prod) => (
             <div
               key={prod._id}
-              class="bg-slate-900 border border-slate-800 rounded-3xl overflow-hidden flex flex-col hover:border-slate-700 transition-colors relative"
+              className="bg-slate-900 border border-slate-800 rounded-3xl overflow-hidden flex flex-col hover:border-slate-700 transition-colors relative"
             >
               {/* Product Badges */}
-              <div class="absolute top-3 left-3 z-10 flex flex-col gap-1.5">
+              <div className="absolute top-3 left-3 z-10 flex flex-col gap-1.5">
                 {prod.featured && (
-                  <span class="px-2 py-0.5 text-[9px] font-bold text-slate-900 bg-amber-400 rounded-full flex items-center gap-0.5 shadow-sm uppercase tracking-wide">
-                    <Star class="w-2.5 h-2.5 fill-slate-900" />
+                  <span className="px-2 py-0.5 text-[9px] font-bold text-slate-900 bg-amber-400 rounded-full flex items-center gap-0.5 shadow-sm uppercase tracking-wide">
+                    <Star className="w-2.5 h-2.5 fill-slate-900" />
                     Featured
                   </span>
                 )}
                 {prod.stock <= 0 ? (
-                  <span class="px-2 py-0.5 text-[9px] font-bold text-slate-400 bg-slate-800 rounded-full border border-slate-700 uppercase tracking-wide">
+                  <span className="px-2 py-0.5 text-[9px] font-bold text-slate-400 bg-slate-800 rounded-full border border-slate-700 uppercase tracking-wide">
                     Sold Out
                   </span>
                 ) : (
                   prod.stock <= 5 && (
-                    <span class="px-2 py-0.5 text-[9px] font-bold text-rose-300 bg-rose-900/40 rounded-full border border-rose-900/50 uppercase tracking-wide">
+                    <span className="px-2 py-0.5 text-[9px] font-bold text-rose-300 bg-rose-900/40 rounded-full border border-rose-900/50 uppercase tracking-wide">
                       Low Stock ({prod.stock})
                     </span>
                   )
@@ -224,44 +224,44 @@ const AdminProducts = () => {
               </div>
 
               {/* Thumbnail Container */}
-              <div class="aspect-square bg-slate-950 relative overflow-hidden flex items-center justify-center">
+              <div className="aspect-square bg-slate-950 relative overflow-hidden flex items-center justify-center">
                 {prod.images && prod.images.length > 0 ? (
-                  <img src={resolveImageUrl(prod.images[0])} alt={prod.name} class="w-full h-full object-cover" />
+                  <img src={resolveImageUrl(prod.images[0])} alt={prod.name} className="w-full h-full object-cover" />
                 ) : (
-                  <ImageIcon class="w-10 h-10 text-slate-700" />
+                  <ImageIcon className="w-10 h-10 text-slate-700" />
                 )}
               </div>
 
               {/* Product Info */}
-              <div class="p-5 flex flex-col flex-grow space-y-3">
+              <div className="p-5 flex flex-col flex-grow space-y-3">
                 <div>
-                  <span class="text-[10px] font-bold tracking-widest text-slate-500 uppercase">{prod.category?.name}</span>
-                  <h3 class="font-serif font-bold text-white text-lg mt-0.5 truncate">{prod.name}</h3>
+                  <span className="text-[10px] font-bold tracking-widest text-slate-500 uppercase">{prod.category?.name}</span>
+                  <h3 className="font-serif font-bold text-white text-lg mt-0.5 truncate">{prod.name}</h3>
                 </div>
                 
-                <div class="flex items-center justify-between text-sm">
-                  <span class="text-slate-450">Price:</span>
-                  <span class="font-bold text-white">{formatCurrency(prod.price)}</span>
+                <div className="flex items-center justify-between text-sm">
+                  <span className="text-slate-450">Price:</span>
+                  <span className="font-bold text-white">{formatCurrency(prod.price)}</span>
                 </div>
-                <div class="flex items-center justify-between text-sm border-t border-slate-800/60 pt-2.5">
-                  <span class="text-slate-450">Stock Quantity:</span>
-                  <span class="font-semibold text-slate-200">{prod.stock} items</span>
+                <div className="flex items-center justify-between text-sm border-t border-slate-800/60 pt-2.5">
+                  <span className="text-slate-450">Stock Quantity:</span>
+                  <span className="font-semibold text-slate-200">{prod.stock} items</span>
                 </div>
 
-                <div class="flex gap-2.5 pt-3 border-t border-slate-800/60 mt-auto">
+                <div className="flex gap-2.5 pt-3 border-t border-slate-800/60 mt-auto">
                   <button
                     onClick={() => openEditModal(prod)}
-                    class="flex-grow flex items-center justify-center gap-1 py-2 rounded-xl text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-200 hover:text-white transition-all cursor-pointer"
+                    className="flex-grow flex items-center justify-center gap-1 py-2 rounded-xl text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-200 hover:text-white transition-all cursor-pointer"
                   >
-                    <Edit2 class="w-3.5 h-3.5" />
+                    <Edit2 className="w-3.5 h-3.5" />
                     Edit
                   </button>
                   <button
                     onClick={() => handleDelete(prod._id, prod.name)}
-                    class="flex items-center justify-center p-2 rounded-xl text-xs font-semibold bg-rose-500/10 hover:bg-rose-500 text-rose-450 hover:text-white transition-all cursor-pointer"
+                    className="flex items-center justify-center p-2 rounded-xl text-xs font-semibold bg-rose-500/10 hover:bg-rose-500 text-rose-450 hover:text-white transition-all cursor-pointer"
                     title="Delete Product"
                   >
-                    <Trash2 class="w-4 h-4" />
+                    <Trash2 className="w-4 h-4" />
                   </button>
                 </div>
               </div>
@@ -269,81 +269,81 @@ const AdminProducts = () => {
           ))}
         </div>
       ) : (
-        <div class="text-center py-20 border border-dashed border-slate-800 rounded-3xl bg-slate-900/30">
-          <Gift class="w-12 h-12 text-slate-800 mx-auto mb-4 animate-pulse" />
-          <h3 class="font-serif font-bold text-white text-lg">No products catalogued</h3>
-          <p class="text-slate-500 text-xs mt-1">Get started by adding your first product gift item.</p>
+        <div className="text-center py-20 border border-dashed border-slate-800 rounded-3xl bg-slate-900/30">
+          <Gift className="w-12 h-12 text-slate-800 mx-auto mb-4 animate-pulse" />
+          <h3 className="font-serif font-bold text-white text-lg">No products catalogued</h3>
+          <p className="text-slate-500 text-xs mt-1">Get started by adding your first product gift item.</p>
         </div>
       )}
 
       {/* ================= EDIT/ADD MODAL DIALOG ================= */}
       {isModalOpen && (
-        <div class="fixed inset-0 z-50 flex items-center justify-center p-4">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
           {/* Backdrop */}
-          <div onClick={() => setIsModalOpen(false)} class="fixed inset-0 bg-slate-950/70 backdrop-blur-xs"></div>
+          <div onClick={() => setIsModalOpen(false)} className="fixed inset-0 bg-slate-950/70 backdrop-blur-xs"></div>
 
           {/* Dialog Body */}
-          <div class="relative w-full max-w-xl bg-slate-900 border border-slate-800 rounded-3xl p-6 sm:p-8 max-h-[90vh] overflow-y-auto z-10 shadow-2xl space-y-6">
+          <div className="relative w-full max-w-xl bg-slate-900 border border-slate-800 rounded-3xl p-6 sm:p-8 max-h-[90vh] overflow-y-auto z-10 shadow-2xl space-y-6">
             
-            <div class="flex items-center justify-between pb-3 border-b border-slate-800">
-              <h3 class="font-serif font-bold text-white text-xl">
+            <div className="flex items-center justify-between pb-3 border-b border-slate-800">
+              <h3 className="font-serif font-bold text-white text-xl">
                 {editingProduct ? 'Edit Gift Product' : 'Add New Gift Product'}
               </h3>
-              <button onClick={() => setIsModalOpen(false)} class="p-1 rounded-full bg-slate-800 text-slate-400 hover:text-white">
-                <X class="w-5 h-5" />
+              <button onClick={() => setIsModalOpen(false)} className="p-1 rounded-full bg-slate-800 text-slate-400 hover:text-white">
+                <X className="w-5 h-5" />
               </button>
             </div>
 
-            <form onSubmit={handleSubmit} class="space-y-4">
+            <form onSubmit={handleSubmit} className="space-y-4">
               
               {/* Product Title */}
-              <div class="flex flex-col gap-1">
-                <label class="text-[10px] font-bold text-slate-400 uppercase tracking-wide">Product Title *</label>
+              <div className="flex flex-col gap-1">
+                <label className="text-[10px] font-bold text-slate-400 uppercase tracking-wide">Product Title *</label>
                 <input
                   type="text"
                   required
                   placeholder="e.g. Dreamy Lavender Hamper"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  class="p-3 bg-slate-950 border border-slate-800 rounded-xl text-sm text-slate-200 placeholder-slate-600 focus:outline-none focus:ring-1 focus:ring-dreamy-lavender-500"
+                  className="p-3 bg-slate-950 border border-slate-800 rounded-xl text-sm text-slate-200 placeholder-slate-600 focus:outline-none focus:ring-1 focus:ring-dreamy-lavender-500"
                 />
               </div>
 
               {/* Price and Stock Row */}
-              <div class="grid grid-cols-2 gap-4">
-                <div class="flex flex-col gap-1">
-                  <label class="text-[10px] font-bold text-slate-400 uppercase tracking-wide">Price (Rs.) *</label>
+              <div className="grid grid-cols-2 gap-4">
+                <div className="flex flex-col gap-1">
+                  <label className="text-[10px] font-bold text-slate-400 uppercase tracking-wide">Price (Rs.) *</label>
                   <input
                     type="number"
                     required
                     placeholder="e.g. 499"
                     value={price}
                     onChange={(e) => setPrice(e.target.value)}
-                    class="p-3 bg-slate-950 border border-slate-800 rounded-xl text-sm text-slate-200 placeholder-slate-600 focus:outline-none focus:ring-1 focus:ring-dreamy-lavender-500"
+                    className="p-3 bg-slate-950 border border-slate-800 rounded-xl text-sm text-slate-200 placeholder-slate-600 focus:outline-none focus:ring-1 focus:ring-dreamy-lavender-500"
                   />
                 </div>
-                <div class="flex flex-col gap-1">
-                  <label class="text-[10px] font-bold text-slate-400 uppercase tracking-wide">Stock Count *</label>
+                <div className="flex flex-col gap-1">
+                  <label className="text-[10px] font-bold text-slate-400 uppercase tracking-wide">Stock Count *</label>
                   <input
                     type="number"
                     required
                     placeholder="e.g. 20"
                     value={stock}
                     onChange={(e) => setStock(e.target.value)}
-                    class="p-3 bg-slate-950 border border-slate-800 rounded-xl text-sm text-slate-200 placeholder-slate-600 focus:outline-none focus:ring-1 focus:ring-dreamy-lavender-500"
+                    className="p-3 bg-slate-950 border border-slate-800 rounded-xl text-sm text-slate-200 placeholder-slate-600 focus:outline-none focus:ring-1 focus:ring-dreamy-lavender-500"
                   />
                 </div>
               </div>
 
               {/* Category selector */}
-              <div class="flex flex-col gap-1">
-                <label class="text-[10px] font-bold text-slate-400 uppercase tracking-wide">Category *</label>
+              <div className="flex flex-col gap-1">
+                <label className="text-[10px] font-bold text-slate-400 uppercase tracking-wide">Category *</label>
                 {categories.length === 0 ? (
-                  <div class="p-3 bg-amber-500/10 border border-amber-500/20 text-amber-400 rounded-xl text-xs flex flex-col gap-1.5">
+                  <div className="p-3 bg-amber-500/10 border border-amber-500/20 text-amber-400 rounded-xl text-xs flex flex-col gap-1.5">
                     <p>No categories exist. You must create at least one category before you can add products.</p>
                     <Link
                       to="/admin/categories"
-                      class="text-dreamy-lavender-400 hover:text-dreamy-lavender-300 font-bold flex items-center gap-1 mt-0.5"
+                      className="text-dreamy-lavender-400 hover:text-dreamy-lavender-300 font-bold flex items-center gap-1 mt-0.5"
                     >
                       Go to Categories Page &rarr;
                     </Link>
@@ -353,7 +353,7 @@ const AdminProducts = () => {
                     required
                     value={category}
                     onChange={(e) => setCategory(e.target.value)}
-                    class="p-3 bg-slate-950 border border-slate-800 rounded-xl text-sm text-slate-200 focus:outline-none focus:ring-1 focus:ring-dreamy-lavender-500"
+                    className="p-3 bg-slate-950 border border-slate-800 rounded-xl text-sm text-slate-200 focus:outline-none focus:ring-1 focus:ring-dreamy-lavender-500"
                   >
                     <option value="" disabled>Select category</option>
                     {categories.map((cat) => (
@@ -364,35 +364,35 @@ const AdminProducts = () => {
               </div>
 
               {/* Description */}
-              <div class="flex flex-col gap-1">
-                <label class="text-[10px] font-bold text-slate-400 uppercase tracking-wide">Description *</label>
+              <div className="flex flex-col gap-1">
+                <label className="text-[10px] font-bold text-slate-400 uppercase tracking-wide">Description *</label>
                 <textarea
                   required
                   rows="3"
                   placeholder="Provide product details..."
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
-                  class="p-3 bg-slate-950 border border-slate-800 rounded-xl text-sm text-slate-200 placeholder-slate-600 focus:outline-none focus:ring-1 focus:ring-dreamy-lavender-500 resize-none"
+                  className="p-3 bg-slate-950 border border-slate-800 rounded-xl text-sm text-slate-200 placeholder-slate-600 focus:outline-none focus:ring-1 focus:ring-dreamy-lavender-500 resize-none"
                 ></textarea>
               </div>
 
               {/* Featured check */}
-              <div class="flex items-center gap-2 py-1">
+              <div className="flex items-center gap-2 py-1">
                 <input
                   type="checkbox"
                   id="featured-field"
                   checked={featured}
                   onChange={(e) => setFeatured(e.target.checked)}
-                  class="rounded border-slate-800 text-dreamy-lavender-600 focus:ring-dreamy-lavender-500 bg-slate-950"
+                  className="rounded border-slate-800 text-dreamy-lavender-600 focus:ring-dreamy-lavender-500 bg-slate-950"
                 />
-                <label htmlFor="featured-field" class="text-xs font-semibold text-slate-300 cursor-pointer select-none">
+                <label htmlFor="featured-field" className="text-xs font-semibold text-slate-300 cursor-pointer select-none">
                   Mark as Featured Product
                 </label>
               </div>
 
               {/* Image upload selector & Previews */}
-              <div class="space-y-3">
-                <label class="text-[10px] font-bold text-slate-400 uppercase tracking-wide block">Images (Multiple allowed)</label>
+              <div className="space-y-3">
+                <label className="text-[10px] font-bold text-slate-400 uppercase tracking-wide block">Images (Multiple allowed)</label>
                 
                 {/* File picker input */}
                 <input
@@ -401,44 +401,44 @@ const AdminProducts = () => {
                   multiple
                   accept="image/*"
                   onChange={handleImageChange}
-                  class="hidden"
+                  className="hidden"
                 />
                 <label
                   htmlFor="file-upload"
-                  class="flex items-center justify-center gap-2 p-4 border border-dashed border-slate-850 hover:border-slate-700 bg-slate-950 rounded-xl text-xs font-semibold text-slate-400 hover:text-white cursor-pointer transition-colors"
+                  className="flex items-center justify-center gap-2 p-4 border border-dashed border-slate-850 hover:border-slate-700 bg-slate-950 rounded-xl text-xs font-semibold text-slate-400 hover:text-white cursor-pointer transition-colors"
                 >
-                  <ImageIcon class="w-4 h-4 text-slate-500" />
+                  <ImageIcon className="w-4 h-4 text-slate-500" />
                   Select Image Files
                 </label>
 
                 {/* Previews Grid */}
                 {(existingImages.length > 0 || imagePreviews.length > 0) && (
-                  <div class="grid grid-cols-4 gap-3 pt-2">
+                  <div className="grid grid-cols-4 gap-3 pt-2">
                     {/* Existing Images */}
                     {existingImages.map((img, idx) => (
-                      <div key={`existing-${idx}`} class="aspect-square bg-slate-950 rounded-lg overflow-hidden border border-slate-800 relative group">
-                        <img src={resolveImageUrl(img)} alt="Existing product" class="w-full h-full object-cover" />
+                      <div key={`existing-${idx}`} className="aspect-square bg-slate-950 rounded-lg overflow-hidden border border-slate-800 relative group">
+                        <img src={resolveImageUrl(img)} alt="Existing product" className="w-full h-full object-cover" />
                         <button
                           type="button"
                           onClick={() => removeExistingImage(img)}
-                          class="absolute top-1 right-1 p-1 bg-rose-500 text-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
+                          className="absolute top-1 right-1 p-1 bg-rose-500 text-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
                         >
-                          <X class="w-3.5 h-3.5" />
+                          <X className="w-3.5 h-3.5" />
                         </button>
                       </div>
                     ))}
                     {/* New Selection Previews */}
                     {imagePreviews.map((preview, idx) => (
-                      <div key={`new-${idx}`} class="aspect-square bg-slate-950 rounded-lg overflow-hidden border border-teal-800 relative group">
-                        <img src={preview} alt="New selection preview" class="w-full h-full object-cover" />
+                      <div key={`new-${idx}`} className="aspect-square bg-slate-950 rounded-lg overflow-hidden border border-teal-800 relative group">
+                        <img src={preview} alt="New selection preview" className="w-full h-full object-cover" />
                         <button
                           type="button"
                           onClick={() => removeNewImagePreview(idx)}
-                          class="absolute top-1 right-1 p-1 bg-rose-500 text-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
+                          className="absolute top-1 right-1 p-1 bg-rose-500 text-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
                         >
-                          <X class="w-3.5 h-3.5" />
+                          <X className="w-3.5 h-3.5" />
                         </button>
-                        <span class="absolute bottom-1 left-1 px-1 py-0.5 text-[8px] bg-teal-600 rounded text-white font-semibold">New</span>
+                        <span className="absolute bottom-1 left-1 px-1 py-0.5 text-[8px] bg-teal-600 rounded text-white font-semibold">New</span>
                       </div>
                     ))}
                   </div>
@@ -446,18 +446,18 @@ const AdminProducts = () => {
               </div>
 
               {/* Submit Buttons */}
-              <div class="flex justify-end gap-3 pt-4 border-t border-slate-800 mt-2">
+              <div className="flex justify-end gap-3 pt-4 border-t border-slate-800 mt-2">
                 <button
                   type="button"
                   onClick={() => setIsModalOpen(false)}
-                  class="py-2.5 px-6 rounded-xl border border-slate-800 text-xs font-semibold text-slate-400 hover:bg-slate-850 hover:text-white"
+                  className="py-2.5 px-6 rounded-xl border border-slate-800 text-xs font-semibold text-slate-400 hover:bg-slate-850 hover:text-white"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={!editingProduct && categories.length === 0}
-                  class="py-2.5 px-6 rounded-xl bg-dreamy-lavender-600 hover:bg-dreamy-lavender-700 disabled:opacity-50 disabled:cursor-not-allowed text-white font-semibold text-xs transition-colors"
+                  className="py-2.5 px-6 rounded-xl bg-dreamy-lavender-600 hover:bg-dreamy-lavender-700 disabled:opacity-50 disabled:cursor-not-allowed text-white font-semibold text-xs transition-colors"
                 >
                   Save Changes
                 </button>

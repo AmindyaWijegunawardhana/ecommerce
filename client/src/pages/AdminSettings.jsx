@@ -91,33 +91,33 @@ const AdminSettings = () => {
   };
 
   return (
-    <div class="space-y-10">
+    <div className="space-y-10">
       
       {/* Title */}
       <div>
-        <h1 class="text-3xl font-serif font-bold text-white tracking-wide">Configuration Settings</h1>
-        <p class="text-xs text-slate-500 mt-1 font-light font-sans">Modify global checkout constants and admin security parameters</p>
+        <h1 className="text-3xl font-serif font-bold text-white tracking-wide">Configuration Settings</h1>
+        <p className="text-xs text-slate-500 mt-1 font-light font-sans">Modify global checkout constants and admin security parameters</p>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
         
         {/* ================= CARD 1: GLOBAL SHOP SETTINGS ================= */}
-        <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 sm:p-8 space-y-6 shadow-sm">
-          <div class="border-b border-slate-800 pb-3 flex items-center gap-2.5">
-            <div class="p-2 rounded-xl bg-dreamy-lavender-550/10 text-dreamy-lavender-400">
-              <Settings class="w-5 h-5" />
+        <div className="bg-slate-900 border border-slate-800 rounded-3xl p-6 sm:p-8 space-y-6 shadow-sm">
+          <div className="border-b border-slate-800 pb-3 flex items-center gap-2.5">
+            <div className="p-2 rounded-xl bg-dreamy-lavender-550/10 text-dreamy-lavender-400">
+              <Settings className="w-5 h-5" />
             </div>
             <div>
-              <h3 class="font-serif font-bold text-white text-lg">Checkout configurations</h3>
-              <p class="text-[10px] text-slate-500 font-sans mt-0.5">Parameters mapping delivery fee and order routing</p>
+              <h3 className="font-serif font-bold text-white text-lg">Checkout configurations</h3>
+              <p className="text-[10px] text-slate-500 font-sans mt-0.5">Parameters mapping delivery fee and order routing</p>
             </div>
           </div>
 
-          <form onSubmit={handleSaveSettings} class="space-y-5">
+          <form onSubmit={handleSaveSettings} className="space-y-5">
             {/* WhatsApp Number */}
-            <div class="flex flex-col gap-1.5">
-              <label class="text-[10px] font-bold text-slate-400 uppercase tracking-wide flex items-center gap-1">
-                <Phone class="w-3.5 h-3.5 text-slate-500" />
+            <div className="flex flex-col gap-1.5">
+              <label className="text-[10px] font-bold text-slate-400 uppercase tracking-wide flex items-center gap-1">
+                <Phone className="w-3.5 h-3.5 text-slate-500" />
                 Business WhatsApp Number
               </label>
               <input
@@ -126,17 +126,17 @@ const AdminSettings = () => {
                 placeholder="Include country code, e.g. 919876543210"
                 value={whatsappNumber}
                 onChange={(e) => setWhatsappNumber(e.target.value)}
-                class="p-3 bg-slate-950 border border-slate-800 rounded-xl text-sm text-slate-200 focus:outline-none focus:ring-1 focus:ring-dreamy-lavender-500"
+                className="p-3 bg-slate-950 border border-slate-800 rounded-xl text-sm text-slate-200 focus:outline-none focus:ring-1 focus:ring-dreamy-lavender-500"
               />
-              <p class="text-[9px] text-slate-500 font-light italic">
+              <p className="text-[9px] text-slate-500 font-light italic">
                 Enter digits only, including country code (e.g. 91 for India), no symbols or leading zeros.
               </p>
             </div>
 
             {/* Delivery Charge */}
-            <div class="flex flex-col gap-1.5">
-              <label class="text-[10px] font-bold text-slate-400 uppercase tracking-wide flex items-center gap-1">
-                <CreditCard class="w-3.5 h-3.5 text-slate-500" />
+            <div className="flex flex-col gap-1.5">
+              <label className="text-[10px] font-bold text-slate-400 uppercase tracking-wide flex items-center gap-1">
+                <CreditCard className="w-3.5 h-3.5 text-slate-500" />
                 Flat Delivery Fee (Rs.)
               </label>
               <input
@@ -145,14 +145,14 @@ const AdminSettings = () => {
                 placeholder="e.g. 50"
                 value={deliveryCharge}
                 onChange={(e) => setDeliveryCharge(e.target.value)}
-                class="p-3 bg-slate-950 border border-slate-800 rounded-xl text-sm text-slate-200 focus:outline-none focus:ring-1 focus:ring-dreamy-lavender-500"
+                className="p-3 bg-slate-950 border border-slate-800 rounded-xl text-sm text-slate-200 focus:outline-none focus:ring-1 focus:ring-dreamy-lavender-500"
               />
             </div>
 
             <button
               type="submit"
               disabled={isSavingSettings}
-              class="w-full py-3.5 rounded-xl bg-dreamy-lavender-600 hover:bg-dreamy-lavender-750 text-white font-semibold text-xs transition-all cursor-pointer shadow-md disabled:opacity-50"
+              className="w-full py-3.5 rounded-xl bg-dreamy-lavender-600 hover:bg-dreamy-lavender-750 text-white font-semibold text-xs transition-all cursor-pointer shadow-md disabled:opacity-50"
             >
               {isSavingSettings ? 'Saving details...' : 'Save Configuration'}
             </button>
@@ -160,62 +160,62 @@ const AdminSettings = () => {
         </div>
 
         {/* ================= CARD 2: PASSWORD CHANGE ================= */}
-        <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 sm:p-8 space-y-6 shadow-sm">
-          <div class="border-b border-slate-800 pb-3 flex items-center gap-2.5">
-            <div class="p-2 rounded-xl bg-rose-500/10 text-rose-455">
-              <Lock class="w-5 h-5" />
+        <div className="bg-slate-900 border border-slate-800 rounded-3xl p-6 sm:p-8 space-y-6 shadow-sm">
+          <div className="border-b border-slate-800 pb-3 flex items-center gap-2.5">
+            <div className="p-2 rounded-xl bg-rose-500/10 text-rose-455">
+              <Lock className="w-5 h-5" />
             </div>
             <div>
-              <h3 class="font-serif font-bold text-white text-lg">Change Admin Password</h3>
-              <p class="text-[10px] text-slate-500 font-sans mt-0.5">Maintain system security by updating secrets</p>
+              <h3 className="font-serif font-bold text-white text-lg">Change Admin Password</h3>
+              <p className="text-[10px] text-slate-500 font-sans mt-0.5">Maintain system security by updating secrets</p>
             </div>
           </div>
 
-          <form onSubmit={handleChangePassword} class="space-y-4">
+          <form onSubmit={handleChangePassword} className="space-y-4">
             
             {/* Current Password */}
-            <div class="flex flex-col gap-1">
-              <label class="text-[10px] font-bold text-slate-400 uppercase tracking-wide">Current Password</label>
+            <div className="flex flex-col gap-1">
+              <label className="text-[10px] font-bold text-slate-400 uppercase tracking-wide">Current Password</label>
               <input
                 type="password"
                 required
                 placeholder="Enter current password"
                 value={currentPassword}
                 onChange={(e) => setCurrentPassword(e.target.value)}
-                class="p-3 bg-slate-950 border border-slate-800 rounded-xl text-sm text-slate-200 focus:outline-none focus:ring-1 focus:ring-rose-500"
+                className="p-3 bg-slate-950 border border-slate-800 rounded-xl text-sm text-slate-200 focus:outline-none focus:ring-1 focus:ring-rose-500"
               />
             </div>
 
             {/* New Password */}
-            <div class="flex flex-col gap-1">
-              <label class="text-[10px] font-bold text-slate-400 uppercase tracking-wide">New Password</label>
+            <div className="flex flex-col gap-1">
+              <label className="text-[10px] font-bold text-slate-400 uppercase tracking-wide">New Password</label>
               <input
                 type="password"
                 required
                 placeholder="Enter new password (min 5 chars)"
                 value={newPassword}
                 onChange={(e) => setNewPassword(e.target.value)}
-                class="p-3 bg-slate-950 border border-slate-800 rounded-xl text-sm text-slate-200 focus:outline-none focus:ring-1 focus:ring-rose-500"
+                className="p-3 bg-slate-950 border border-slate-800 rounded-xl text-sm text-slate-200 focus:outline-none focus:ring-1 focus:ring-rose-500"
               />
             </div>
 
             {/* Confirm New Password */}
-            <div class="flex flex-col gap-1">
-              <label class="text-[10px] font-bold text-slate-400 uppercase tracking-wide">Confirm New Password</label>
+            <div className="flex flex-col gap-1">
+              <label className="text-[10px] font-bold text-slate-400 uppercase tracking-wide">Confirm New Password</label>
               <input
                 type="password"
                 required
                 placeholder="Confirm your new password"
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
-                class="p-3 bg-slate-950 border border-slate-800 rounded-xl text-sm text-slate-200 focus:outline-none focus:ring-1 focus:ring-rose-500"
+                className="p-3 bg-slate-950 border border-slate-800 rounded-xl text-sm text-slate-200 focus:outline-none focus:ring-1 focus:ring-rose-500"
               />
             </div>
 
             <button
               type="submit"
               disabled={isChangingPassword}
-              class="w-full py-3.5 rounded-xl bg-rose-500/10 hover:bg-rose-500 text-rose-450 hover:text-white font-semibold text-xs transition-all cursor-pointer disabled:opacity-50 mt-2"
+              className="w-full py-3.5 rounded-xl bg-rose-500/10 hover:bg-rose-500 text-rose-450 hover:text-white font-semibold text-xs transition-all cursor-pointer disabled:opacity-50 mt-2"
             >
               {isChangingPassword ? 'Modifying Password...' : 'Change Password'}
             </button>

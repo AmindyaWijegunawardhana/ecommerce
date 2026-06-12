@@ -5,7 +5,7 @@ const settingsSchema = new mongoose.Schema(
     whatsappNumber: {
       type: String,
       required: true,
-      default: '919876543210', // Default phone number format (with country code, no symbols)
+      default: '+94707066217', // Default phone number format (with country code, optionally symbols)
     },
     deliveryCharge: {
       type: Number,

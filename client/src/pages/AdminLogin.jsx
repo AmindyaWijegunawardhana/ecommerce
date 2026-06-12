@@ -49,45 +49,45 @@ const AdminLogin = () => {
   };
 
   return (
-    <div class="min-h-screen bg-slate-950 flex flex-col justify-center items-center px-4 relative overflow-hidden">
+    <div className="min-h-screen bg-slate-950 flex flex-col justify-center items-center px-4 relative overflow-hidden">
       
       {/* Back to Home Link */}
       <button
         onClick={() => navigate('/')}
-        class="absolute top-6 left-6 text-slate-500 hover:text-white flex items-center gap-1.5 text-xs font-semibold tracking-wide transition-colors"
+        className="absolute top-6 left-6 text-slate-500 hover:text-white flex items-center gap-1.5 text-xs font-semibold tracking-wide transition-colors"
       >
-        <ArrowLeft class="w-4 h-4" />
+        <ArrowLeft className="w-4 h-4" />
         Back to public site
       </button>
 
       {/* Login Card Container */}
-      <div class="w-full max-w-md bg-slate-900 border border-slate-800 rounded-3xl p-8 sm:p-10 shadow-2xl z-10 space-y-8">
+      <div className="w-full max-w-md bg-slate-900 border border-slate-800 rounded-3xl p-8 sm:p-10 shadow-2xl z-10 space-y-8">
         
         {/* Branding header */}
-        <div class="text-center space-y-3">
-          <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-dreamy-pink-500 to-dreamy-lavender-600 flex items-center justify-center text-white mx-auto shadow-lg shadow-dreamy-lavender-500/10">
-            <Gift class="w-6 h-6 animate-pulse" />
+        <div className="text-center space-y-3">
+          <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-dreamy-pink-500 to-dreamy-lavender-600 flex items-center justify-center text-white mx-auto shadow-lg shadow-dreamy-lavender-500/10">
+            <Gift className="w-6 h-6 animate-pulse" />
           </div>
           <div>
-            <h2 class="text-xl sm:text-2xl font-bold font-serif text-white tracking-wide">Rashi Dreamy Gifts</h2>
-            <p class="text-[10px] text-slate-500 uppercase tracking-widest mt-1">Authorized Admin Access</p>
+            <h2 className="text-xl sm:text-2xl font-bold font-serif text-white tracking-wide">Rashi Dreamy Gifts</h2>
+            <p className="text-[10px] text-slate-500 uppercase tracking-widest mt-1">Authorized Admin Access</p>
           </div>
         </div>
 
         {/* Error Alert Box */}
         {error && (
-          <div class="flex items-center gap-2.5 p-4 rounded-2xl bg-rose-500/10 border border-rose-500/20 text-rose-300 text-xs sm:text-sm animate-fade-in">
-            <AlertCircle class="w-4.5 h-4.5 text-rose-400 flex-shrink-0" />
+          <div className="flex items-center gap-2.5 p-4 rounded-2xl bg-rose-500/10 border border-rose-500/20 text-rose-300 text-xs sm:text-sm animate-fade-in">
+            <AlertCircle className="w-4.5 h-4.5 text-rose-400 flex-shrink-0" />
             <p>{error}</p>
           </div>
         )}
 
         {/* Login Form */}
-        <form onSubmit={handleSubmit} class="space-y-5">
+        <form onSubmit={handleSubmit} className="space-y-5">
           {/* Username */}
-          <div class="flex flex-col gap-1.5">
-            <label class="text-[11px] font-bold text-slate-400 uppercase tracking-wider flex items-center gap-1.5">
-              <User class="w-3.5 h-3.5 text-slate-500" />
+          <div className="flex flex-col gap-1.5">
+            <label className="text-[11px] font-bold text-slate-400 uppercase tracking-wider flex items-center gap-1.5">
+              <User className="w-3.5 h-3.5 text-slate-500" />
               Username
             </label>
             <input
@@ -97,14 +97,14 @@ const AdminLogin = () => {
               placeholder="Enter admin username"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
-              class="p-3.5 bg-slate-950 border border-slate-800 rounded-2xl text-sm text-slate-200 placeholder-slate-600 focus:outline-none focus:ring-1 focus:ring-dreamy-lavender-500 focus:border-dreamy-lavender-500 disabled:opacity-50"
+              className="p-3.5 bg-slate-950 border border-slate-800 rounded-2xl text-sm text-slate-200 placeholder-slate-600 focus:outline-none focus:ring-1 focus:ring-dreamy-lavender-500 focus:border-dreamy-lavender-500 disabled:opacity-50"
             />
           </div>
 
           {/* Password */}
-          <div class="flex flex-col gap-1.5">
-            <label class="text-[11px] font-bold text-slate-400 uppercase tracking-wider flex items-center gap-1.5">
-              <Lock class="w-3.5 h-3.5 text-slate-500" />
+          <div className="flex flex-col gap-1.5">
+            <label className="text-[11px] font-bold text-slate-400 uppercase tracking-wider flex items-center gap-1.5">
+              <Lock className="w-3.5 h-3.5 text-slate-500" />
               Password
             </label>
             <input
@@ -114,7 +114,7 @@ const AdminLogin = () => {
               placeholder="Enter admin password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              class="p-3.5 bg-slate-950 border border-slate-800 rounded-2xl text-sm text-slate-200 placeholder-slate-600 focus:outline-none focus:ring-1 focus:ring-dreamy-lavender-500 focus:border-dreamy-lavender-500 disabled:opacity-50"
+              className="p-3.5 bg-slate-950 border border-slate-800 rounded-2xl text-sm text-slate-200 placeholder-slate-600 focus:outline-none focus:ring-1 focus:ring-dreamy-lavender-500 focus:border-dreamy-lavender-500 disabled:opacity-50"
             />
           </div>
 
@@ -122,11 +122,11 @@ const AdminLogin = () => {
           <button
             type="submit"
             disabled={isLoading}
-            class="w-full py-4 rounded-2xl bg-gradient-to-r from-dreamy-lavender-650 to-dreamy-lavender-800 text-white font-semibold text-sm shadow-lg shadow-dreamy-lavender-900/20 hover:opacity-95 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 cursor-pointer mt-4"
+            className="w-full py-4 rounded-2xl bg-gradient-to-r from-dreamy-lavender-650 to-dreamy-lavender-800 text-white font-semibold text-sm shadow-lg shadow-dreamy-lavender-900/20 hover:opacity-95 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 cursor-pointer mt-4"
           >
             {isLoading ? (
               <>
-                <div class="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
                 Authenticating...
               </>
             ) : (
@@ -137,8 +137,8 @@ const AdminLogin = () => {
       </div>
 
       {/* Decorative Blur Background Blobs */}
-      <div class="absolute -top-10 -left-10 w-80 h-80 bg-dreamy-pink-900/10 rounded-full blur-3xl opacity-30"></div>
-      <div class="absolute -bottom-10 -right-10 w-80 h-80 bg-dreamy-lavender-900/10 rounded-full blur-3xl opacity-30"></div>
+      <div className="absolute -top-10 -left-10 w-80 h-80 bg-dreamy-pink-900/10 rounded-full blur-3xl opacity-30"></div>
+      <div className="absolute -bottom-10 -right-10 w-80 h-80 bg-dreamy-lavender-900/10 rounded-full blur-3xl opacity-30"></div>
 
     </div>
   );

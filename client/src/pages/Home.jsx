@@ -32,17 +32,17 @@ const Home = () => {
 
   const valueProps = [
     {
-      icon: <Sparkles class="w-6 h-6 text-dreamy-gold" />,
+      icon: <Sparkles className="w-6 h-6 text-dreamy-gold" />,
       title: 'Handcrafted With Love',
       desc: 'Each piece is hand-selected or custom-made to ensure it carries a special spark.'
     },
     {
-      icon: <Heart class="w-6 h-6 text-dreamy-pink-500" />,
+      icon: <Heart className="w-6 h-6 text-dreamy-pink-500" />,
       title: 'Personalized Touch',
       desc: 'Customize products with names, photos, or customized letters for your loved ones.'
     },
     {
-      icon: <Clock class="w-6 h-6 text-dreamy-lavender-500" />,
+      icon: <Clock className="w-6 h-6 text-dreamy-lavender-500" />,
       title: 'Timely Coordination',
       desc: 'Direct communication via WhatsApp ensures your specifications are met on time.'
     }
@@ -67,37 +67,37 @@ const Home = () => {
   ];
 
   return (
-    <div class="space-y-16 sm:space-y-24 pb-16">
+    <div className="space-y-16 sm:space-y-24 pb-16">
       
       {/* 1. Hero Section */}
-      <section class="relative overflow-hidden py-16 sm:py-24 bg-gradient-to-tr from-dreamy-pink-100/40 via-white to-dreamy-lavender-100/50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div class="text-center max-w-3xl mx-auto space-y-6 sm:space-y-8">
-            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold text-dreamy-lavender-700 bg-dreamy-lavender-50 border border-dreamy-lavender-150 tracking-wide uppercase">
-              <Sparkles class="w-3.5 h-3.5" />
+      <section className="relative overflow-hidden py-16 sm:py-24 bg-gradient-to-tr from-dreamy-pink-100/40 via-white to-dreamy-lavender-100/50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="text-center max-w-3xl mx-auto space-y-6 sm:space-y-8">
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold text-dreamy-lavender-700 bg-dreamy-lavender-50 border border-dreamy-lavender-150 tracking-wide uppercase">
+              <Sparkles className="w-3.5 h-3.5" />
               Gift Shop & Fancy Items
             </span>
             
-            <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight text-slate-800 leading-[1.15]">
-              Make Every Occasion A <br class="hidden sm:inline" />
-              <span class="gold-text-gradient italic">Dreamy Celebration</span>
+            <h1 className="text-4xl sm:text-6xl font-extrabold tracking-tight text-slate-800 leading-[1.15]">
+              Make Every Occasion A <br className="hidden sm:inline" />
+              <span className="gold-text-gradient italic">Dreamy Celebration</span>
             </h1>
             
-            <p class="text-base sm:text-lg text-slate-600 leading-relaxed max-w-xl mx-auto font-light">
+            <p className="text-base sm:text-lg text-slate-600 leading-relaxed max-w-xl mx-auto font-light">
               Explore our collection of custom curated gifts, fancy hampers, and beautiful accessories tailored to convey your deepest sentiments.
             </p>
             
-            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link
                 to="/shop"
-                class="w-full sm:w-auto flex items-center justify-center gap-2 py-3.5 px-8 rounded-xl text-sm font-semibold text-white bg-gradient-to-r from-dreamy-lavender-600 to-dreamy-lavender-700 shadow-md hover:shadow-lg hover:scale-102 transition-all cursor-pointer"
+                className="w-full sm:w-auto flex items-center justify-center gap-2 py-3.5 px-8 rounded-xl text-sm font-semibold text-white bg-gradient-to-r from-dreamy-lavender-600 to-dreamy-lavender-700 shadow-md hover:shadow-lg hover:scale-102 transition-all cursor-pointer"
               >
                 Shop Collection
-                <ArrowRight class="w-4 h-4" />
+                <ArrowRight className="w-4 h-4" />
               </Link>
               <Link
                 to="/about"
-                class="w-full sm:w-auto flex items-center justify-center py-3.5 px-8 rounded-xl text-sm font-medium text-slate-700 bg-white border border-slate-200 hover:bg-slate-50 transition-colors shadow-xs"
+                className="w-full sm:w-auto flex items-center justify-center py-3.5 px-8 rounded-xl text-sm font-medium text-slate-700 bg-white border border-slate-200 hover:bg-slate-50 transition-colors shadow-xs"
               >
                 Our Story
               </Link>
@@ -106,106 +106,106 @@ const Home = () => {
         </div>
         
         {/* Abstract dreamy blobs in background */}
-        <div class="absolute top-1/4 left-10 w-72 h-72 rounded-full bg-dreamy-pink-100 blur-3xl opacity-60 animate-float"></div>
-        <div class="absolute bottom-1/4 right-10 w-96 h-96 rounded-full bg-dreamy-lavender-100 blur-3xl opacity-60 animate-float" style={{ animationDelay: '2s' }}></div>
+        <div className="absolute top-1/4 left-10 w-72 h-72 rounded-full bg-dreamy-pink-100 blur-3xl opacity-60 animate-float"></div>
+        <div className="absolute bottom-1/4 right-10 w-96 h-96 rounded-full bg-dreamy-lavender-100 blur-3xl opacity-60 animate-float" style={{ animationDelay: '2s' }}></div>
       </section>
 
       {/* 2. Featured Products Section */}
-      <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex flex-col sm:flex-row items-end justify-between mb-8 sm:mb-12 gap-4">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex flex-col sm:flex-row items-end justify-between mb-8 sm:mb-12 gap-4">
           <div>
-            <span class="text-xs uppercase tracking-widest text-dreamy-lavender-600 font-bold">Curated Picks</span>
-            <h2 class="text-2xl sm:text-4xl font-bold text-slate-800 mt-1">Featured Products</h2>
+            <span className="text-xs uppercase tracking-widest text-dreamy-lavender-600 font-bold">Curated Picks</span>
+            <h2 className="text-2xl sm:text-4xl font-bold text-slate-800 mt-1">Featured Products</h2>
           </div>
           <Link
             to="/shop?featured=true"
-            class="flex items-center gap-1 text-sm font-semibold text-dreamy-lavender-600 hover:text-dreamy-lavender-750 transition-colors"
+            className="flex items-center gap-1 text-sm font-semibold text-dreamy-lavender-600 hover:text-dreamy-lavender-750 transition-colors"
           >
             See All Featured
-            <ArrowRight class="w-4 h-4" />
+            <ArrowRight className="w-4 h-4" />
           </Link>
         </div>
 
         {loading ? (
-          <div class="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
             {[1, 2, 3, 4].map((i) => (
-              <div key={i} class="bg-white rounded-2xl p-4 border border-slate-100 space-y-4 animate-pulse">
-                <div class="aspect-square bg-slate-100 rounded-xl"></div>
-                <div class="h-4 bg-slate-100 rounded-sm w-3/4"></div>
-                <div class="h-3 bg-slate-100 rounded-sm w-1/2"></div>
-                <div class="flex justify-between items-center">
-                  <div class="h-5 bg-slate-100 rounded-sm w-1/4"></div>
-                  <div class="h-8 bg-slate-100 rounded-md w-1/3"></div>
+              <div key={i} className="bg-white rounded-2xl p-4 border border-slate-100 space-y-4 animate-pulse">
+                <div className="aspect-square bg-slate-100 rounded-xl"></div>
+                <div className="h-4 bg-slate-100 rounded-sm w-3/4"></div>
+                <div className="h-3 bg-slate-100 rounded-sm w-1/2"></div>
+                <div className="flex justify-between items-center">
+                  <div className="h-5 bg-slate-100 rounded-sm w-1/4"></div>
+                  <div className="h-8 bg-slate-100 rounded-md w-1/3"></div>
                 </div>
               </div>
             ))}
           </div>
         ) : featuredProducts.length > 0 ? (
-          <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
             {featuredProducts.map((product) => (
               <ProductCard key={product._id} product={product} />
             ))}
           </div>
         ) : (
-          <div class="text-center py-12 border border-dashed border-slate-200 rounded-2xl bg-slate-50/50">
-            <Gift class="w-10 h-10 text-slate-300 mx-auto mb-3 animate-bounce" />
-            <p class="text-sm text-slate-500">No featured products available yet.</p>
-            <Link to="/shop" class="text-xs font-semibold text-dreamy-lavender-600 mt-1 inline-block">Browse Catalog</Link>
+          <div className="text-center py-12 border border-dashed border-slate-200 rounded-2xl bg-slate-50/50">
+            <Gift className="w-10 h-10 text-slate-300 mx-auto mb-3 animate-bounce" />
+            <p className="text-sm text-slate-500">No featured products available yet.</p>
+            <Link to="/shop" className="text-xs font-semibold text-dreamy-lavender-600 mt-1 inline-block">Browse Catalog</Link>
           </div>
         )}
       </section>
 
       {/* 3. Product Categories Section */}
-      <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 bg-white/40 rounded-3xl border border-dreamy-lavender-100/50">
-        <div class="text-center max-w-xl mx-auto mb-10">
-          <span class="text-xs uppercase tracking-widest text-dreamy-lavender-600 font-bold">Collections</span>
-          <h2 class="text-2xl sm:text-4xl font-bold text-slate-800 mt-1">Browse Categories</h2>
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 bg-white/40 rounded-3xl border border-dreamy-lavender-100/50">
+        <div className="text-center max-w-xl mx-auto mb-10">
+          <span className="text-xs uppercase tracking-widest text-dreamy-lavender-600 font-bold">Collections</span>
+          <h2 className="text-2xl sm:text-4xl font-bold text-slate-800 mt-1">Browse Categories</h2>
         </div>
 
         {loading ? (
-          <div class="flex justify-center py-8">
-            <div class="w-6 h-6 border-2 border-dreamy-lavender-600 border-t-transparent rounded-full animate-spin"></div>
+          <div className="flex justify-center py-8">
+            <div className="w-6 h-6 border-2 border-dreamy-lavender-600 border-t-transparent rounded-full animate-spin"></div>
           </div>
         ) : categories.length > 0 ? (
-          <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
             {categories.map((category) => (
               <Link
                 key={category._id}
                 to={`/shop?category=${encodeURIComponent(category.name)}`}
-                class="group p-5 rounded-2xl bg-white border border-dreamy-lavender-100 hover:border-dreamy-pink-200 text-center shadow-xs hover:shadow-md hover:scale-102 transition-all duration-300"
+                className="group p-5 rounded-2xl bg-white border border-dreamy-lavender-100 hover:border-dreamy-pink-200 text-center shadow-xs hover:shadow-md hover:scale-102 transition-all duration-300"
               >
-                <div class="w-12 h-12 rounded-xl bg-dreamy-pink-50 flex items-center justify-center mx-auto mb-3 group-hover:scale-110 group-hover:bg-dreamy-pink-100 transition-all">
-                  <Sparkles class="w-5 h-5 text-dreamy-lavender-600" />
+                <div className="w-12 h-12 rounded-xl bg-dreamy-pink-50 flex items-center justify-center mx-auto mb-3 group-hover:scale-110 group-hover:bg-dreamy-pink-100 transition-all">
+                  <Sparkles className="w-5 h-5 text-dreamy-lavender-600" />
                 </div>
-                <h3 class="font-serif font-bold text-slate-800 text-base mb-1">{category.name}</h3>
-                <p class="text-xs text-slate-400 line-clamp-1">{category.description || 'Browse products'}</p>
+                <h3 className="font-serif font-bold text-slate-800 text-base mb-1">{category.name}</h3>
+                <p className="text-xs text-slate-400 line-clamp-1">{category.description || 'Browse products'}</p>
               </Link>
             ))}
           </div>
         ) : (
-          <div class="text-center py-6 text-slate-400 text-sm">No categories created yet.</div>
+          <div className="text-center py-6 text-slate-400 text-sm">No categories created yet.</div>
         )}
       </section>
 
       {/* 4. Why Choose Us Section */}
-      <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center max-w-xl mx-auto mb-12 sm:mb-16">
-          <span class="text-xs uppercase tracking-widest text-dreamy-lavender-600 font-bold">Core Strengths</span>
-          <h2 class="text-2xl sm:text-4xl font-bold text-slate-800 mt-1">Why Choose Us?</h2>
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center max-w-xl mx-auto mb-12 sm:mb-16">
+          <span className="text-xs uppercase tracking-widest text-dreamy-lavender-600 font-bold">Core Strengths</span>
+          <h2 className="text-2xl sm:text-4xl font-bold text-slate-800 mt-1">Why Choose Us?</h2>
         </div>
         
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {valueProps.map((prop, i) => (
             <div
               key={i}
-              class="p-6 rounded-2xl bg-white border border-dreamy-lavender-100/60 shadow-xs hover:border-dreamy-pink-200 transition-colors flex flex-col gap-4"
+              className="p-6 rounded-2xl bg-white border border-dreamy-lavender-100/60 shadow-xs hover:border-dreamy-pink-200 transition-colors flex flex-col gap-4"
             >
-              <div class="w-12 h-12 rounded-xl bg-slate-50 flex items-center justify-center flex-shrink-0 shadow-inner">
+              <div className="w-12 h-12 rounded-xl bg-slate-50 flex items-center justify-center flex-shrink-0 shadow-inner">
                 {prop.icon}
               </div>
               <div>
-                <h3 class="font-serif font-bold text-slate-800 text-lg mb-2">{prop.title}</h3>
-                <p class="text-sm text-slate-500 leading-relaxed">{prop.desc}</p>
+                <h3 className="font-serif font-bold text-slate-800 text-lg mb-2">{prop.title}</h3>
+                <p className="text-sm text-slate-500 leading-relaxed">{prop.desc}</p>
               </div>
             </div>
           ))}
@@ -213,28 +213,28 @@ const Home = () => {
       </section>
 
       {/* 5. Customer Reviews Section */}
-      <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 bg-gradient-to-br from-dreamy-lavender-50 to-dreamy-pink-50/50 rounded-3xl border border-dreamy-lavender-100">
-        <div class="text-center max-w-xl mx-auto mb-12">
-          <span class="text-xs uppercase tracking-widest text-dreamy-lavender-600 font-bold">Feedback</span>
-          <h2 class="text-2xl sm:text-4xl font-bold text-slate-800 mt-1">Customer Reviews</h2>
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 bg-gradient-to-br from-dreamy-lavender-50 to-dreamy-pink-50/50 rounded-3xl border border-dreamy-lavender-100">
+        <div className="text-center max-w-xl mx-auto mb-12">
+          <span className="text-xs uppercase tracking-widest text-dreamy-lavender-600 font-bold">Feedback</span>
+          <h2 className="text-2xl sm:text-4xl font-bold text-slate-800 mt-1">Customer Reviews</h2>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {testimonials.map((t, idx) => (
-            <div key={idx} class="p-6 rounded-2xl bg-white shadow-sm border border-white flex flex-col gap-4 relative">
-              <div class="flex items-center gap-1 text-dreamy-gold">
+            <div key={idx} className="p-6 rounded-2xl bg-white shadow-sm border border-white flex flex-col gap-4 relative">
+              <div className="flex items-center gap-1 text-dreamy-gold">
                 {[...Array(t.rating)].map((_, i) => (
-                  <Star key={i} class="w-4 h-4 fill-dreamy-gold" />
+                  <Star key={i} className="w-4 h-4 fill-dreamy-gold" />
                 ))}
               </div>
-              <p class="text-sm italic text-slate-600 leading-relaxed flex-grow">
+              <p className="text-sm italic text-slate-600 leading-relaxed flex-grow">
                 "{t.text}"
               </p>
-              <div class="flex items-center gap-3 pt-3 border-t border-slate-50 mt-auto">
-                <div class="w-8 h-8 rounded-full bg-dreamy-pink-100 flex items-center justify-center text-dreamy-lavender-750 font-bold text-xs">
+              <div className="flex items-center gap-3 pt-3 border-t border-slate-50 mt-auto">
+                <div className="w-8 h-8 rounded-full bg-dreamy-pink-100 flex items-center justify-center text-dreamy-lavender-750 font-bold text-xs">
                   {t.name[0]}
                 </div>
-                <span class="text-sm font-semibold text-slate-800">{t.name}</span>
+                <span className="text-sm font-semibold text-slate-800">{t.name}</span>
               </div>
             </div>
           ))}

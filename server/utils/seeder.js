@@ -18,16 +18,23 @@ const seedData = async () => {
     }
 
     // 2. Seed Settings
-    const settingsExist = await Settings.findOne();
-    if (!settingsExist) {
-      const whatsappNumber = process.env.DEFAULT_WHATSAPP || '94707066217';
-      const deliveryCharge = process.env.DEFAULT_DELIVERY_CHARGE || 50;
+    let settings = await Settings.findOne();
+    const whatsappNumber = process.env.DEFAULT_WHATSAPP || '+94707066217';
+    const deliveryCharge = process.env.DEFAULT_DELIVERY_CHARGE || 50;
 
+    if (!settings) {
       await Settings.create({
         whatsappNumber,
         deliveryCharge,
       });
       console.log(`Seeded default settings. WhatsApp: ${whatsappNumber}, Delivery: ${deliveryCharge}`);
+    } else {
+      // If settings exist, ensure it has the plus sign if it's the old default
+      if (settings.whatsappNumber === '94707066217') {
+        settings.whatsappNumber = '+94707066217';
+        await settings.save();
+        console.log(`Updated existing default settings WhatsApp to +94707066217`);
+      }
     }
   } catch (error) {
     console.error(`Error seeding data: ${error.message}`);
