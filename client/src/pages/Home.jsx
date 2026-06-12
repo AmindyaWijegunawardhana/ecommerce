@@ -70,7 +70,7 @@ const Home = () => {
     <div className="space-y-16 sm:space-y-24 pb-16">
       
       {/* 1. Hero Section */}
-      <section className="relative overflow-hidden py-16 sm:py-24 bg-gradient-to-tr from-dreamy-pink-100/40 via-white to-dreamy-lavender-100/50">
+      <section className="relative overflow-hidden py-16 sm:py-24 bg-gradient-to-tr from-dreamy-pink-100/50 via-dreamy-pink-50/30 to-dreamy-lavender-100/50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center max-w-3xl mx-auto space-y-6 sm:space-y-8">
             <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold text-dreamy-lavender-700 bg-dreamy-lavender-50 border border-dreamy-lavender-150 tracking-wide uppercase">
