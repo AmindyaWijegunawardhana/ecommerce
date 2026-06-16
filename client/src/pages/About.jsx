@@ -4,6 +4,7 @@ import aboutLogo from '../assets/background.jpg';
 import { SettingsContext } from '../context/SettingsContext';
 
 const About = () => {
+  const { settings } = useContext(SettingsContext);
   const [openFaq, setOpenFaq] = useState(null);
 
   const faqs = [
