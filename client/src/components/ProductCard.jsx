@@ -214,7 +214,7 @@ const ProductCard = ({ product }) => {
                   : 'bg-gradient-to-r from-dreamy-pink-500 to-dreamy-lavender-600 hover:from-dreamy-pink-600 hover:to-dreamy-lavender-750 text-white'
               }`}
             >
-              <span>Order</span>
+              <span>Buy Now</span>
             </button>
           </div>
         </div>
