@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
-import { Gift, Heart, Sparkles, Phone, Mail, MapPin, ChevronDown, ChevronUp } from 'lucide-react';
+import React, { useState, useContext } from 'react';
+import { Gift, Heart, Sparkles, Phone, Mail, MapPin, ChevronDown, ChevronUp, Eye, Award } from 'lucide-react';
 import aboutLogo from '../assets/background.jpg';
+import { SettingsContext } from '../context/SettingsContext';
 
 const About = () => {
   const [openFaq, setOpenFaq] = useState(null);
@@ -64,42 +65,38 @@ const About = () => {
         </div>
       </section>
 
-      {/* 2. Mission Section */}
+      {/* 2. Mission & Vision Section */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 bg-white border-y border-dreamy-lavender-100">
-        <div className="text-center max-w-xl mx-auto mb-16">
-          <span className="text-xs uppercase tracking-widest text-dreamy-lavender-600 font-bold">Our Philosophy</span>
-          <h2 className="text-2xl sm:text-4xl font-bold text-slate-800 mt-1">Our Core Mission</h2>
+        <div className="text-center max-w-xl mx-auto mb-12">
+          <span className="text-xs uppercase tracking-widest text-dreamy-lavender-600 font-bold">Our Purpose</span>
+          <h2 className="text-2xl sm:text-4xl font-bold text-slate-800 mt-1">Mission & Vision</h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-          <div className="text-center space-y-3">
-            <div className="w-12 h-12 rounded-xl bg-dreamy-pink-50 text-dreamy-pink-600 flex items-center justify-center mx-auto shadow-xs">
-              <Heart className="w-6 h-6" />
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-12 max-w-5xl mx-auto">
+          {/* Mission Card */}
+          <div className="p-8 rounded-3xl bg-gradient-to-br from-dreamy-pink-50/50 to-white border border-dreamy-pink-100/50 shadow-2xs hover:shadow-sm transition-all hover:scale-101 duration-300 flex flex-col gap-5">
+            <div className="w-14 h-14 rounded-2xl bg-dreamy-pink-100 flex items-center justify-center text-dreamy-pink-600">
+              <Award className="w-7 h-7" />
             </div>
-            <h3 className="font-serif font-bold text-slate-800 text-lg">Emotional Connection</h3>
-            <p className="text-xs text-slate-500 leading-relaxed font-light">
-              Creating customizable gifts that carry personal stories and strengthen relationships.
-            </p>
+            <div className="space-y-2">
+              <h3 className="font-serif font-bold text-slate-800 text-xl">Our Mission</h3>
+              <p className="text-xs sm:text-sm text-slate-500 font-light leading-relaxed">
+                To handcraft and customize premium hampers, gorgeous floral box designs, and elegant fancy accessories that convey your deepest thoughts. We aim to make gifting an emotional and personal expression rather than just a transaction.
+              </p>
+            </div>
           </div>
 
-          <div className="text-center space-y-3">
-            <div className="w-12 h-12 rounded-xl bg-dreamy-gold-100/50 text-dreamy-gold-700 flex items-center justify-center mx-auto shadow-xs">
-              <Sparkles className="w-6 h-6" />
+          {/* Vision Card */}
+          <div className="p-8 rounded-3xl bg-gradient-to-br from-dreamy-lavender-50/50 to-white border border-dreamy-lavender-100/50 shadow-2xs hover:shadow-sm transition-all hover:scale-101 duration-300 flex flex-col gap-5">
+            <div className="w-14 h-14 rounded-2xl bg-dreamy-lavender-100 flex items-center justify-center text-dreamy-lavender-750">
+              <Eye className="w-7 h-7" />
             </div>
-            <h3 className="font-serif font-bold text-slate-800 text-lg">Premium Elegance</h3>
-            <p className="text-xs text-slate-500 leading-relaxed font-light">
-              Ensuring each detail, from product quality to final ribbon packaging, is stunning.
-            </p>
-          </div>
-
-          <div className="text-center space-y-3">
-            <div className="w-12 h-12 rounded-xl bg-dreamy-lavender-50 text-dreamy-lavender-600 flex items-center justify-center mx-auto shadow-xs">
-              <Gift className="w-6 h-6" />
+            <div className="space-y-2">
+              <h3 className="font-serif font-bold text-slate-850 text-xl">Our Vision</h3>
+              <p className="text-xs sm:text-sm text-slate-500 font-light leading-relaxed">
+                To establish ourselves as the most trusted and sought-after premium boutique online gift store, celebrated for our elegant pastel themes, outstanding customer communication via WhatsApp checkout, and seamless delivery networks.
+              </p>
             </div>
-            <h3 className="font-serif font-bold text-slate-800 text-lg">Direct Accessibility</h3>
-            <p className="text-xs text-slate-500 leading-relaxed font-light">
-              Direct checkout communication via WhatsApp ensures your request is handled with detail.
-            </p>
           </div>
         </div>
       </section>
@@ -145,7 +142,7 @@ const About = () => {
               </div>
               <div>
                 <h4 className="font-serif font-bold text-slate-800 text-base mb-1">WhatsApp Chat</h4>
-                <p className="text-xs text-slate-500">+91 98765 43210</p>
+                <p className="text-xs text-slate-500">{settings?.whatsappNumber || '+91 98765 43210'}</p>
                 <p className="text-[10px] text-slate-400">Available 9:00 AM - 9:00 PM</p>
               </div>
             </div>
@@ -167,7 +164,7 @@ const About = () => {
               </div>
               <div>
                 <h4 className="font-serif font-bold text-slate-800 text-base mb-1">Our Workshop</h4>
-                <p className="text-xs text-slate-500">Main Bazar Road, City Center, India</p>
+                <p className="text-xs text-slate-500">{settings?.storeName || 'Rashi Dreamy Gifts'}, Main Bazar Road, City Center, India</p>
                 <p className="text-[10px] text-slate-400">Visit by appointment</p>
               </div>
             </div>

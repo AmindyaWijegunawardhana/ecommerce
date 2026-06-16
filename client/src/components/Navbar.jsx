@@ -2,10 +2,12 @@ import React, { useState, useContext } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { ShoppingCart, Menu, X, Gift } from 'lucide-react';
 import { CartContext } from '../context/CartContext';
+import { SettingsContext } from '../context/SettingsContext';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { getCartCount } = useContext(CartContext);
+  const { settings } = useContext(SettingsContext);
   const location = useLocation();
 
   const isActive = (path) => location.pathname === path;
@@ -27,7 +29,7 @@ const Navbar = () => {
               <Gift className="w-6 h-6 text-dreamy-lavender-700" />
             </div>
             <span className="font-serif text-xl sm:text-2xl font-bold tracking-tight text-slate-800">
-              Rashi <span className="text-dreamy-lavender-600 font-semibold italic">Dreamy</span> Gifts
+              {settings?.storeName || 'Rashi Dreamy Gifts'}
             </span>
           </Link>
 

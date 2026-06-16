@@ -76,26 +76,21 @@ const Cart = () => {
       
       addToast('Order saved! Redirecting to WhatsApp...', 'success');
 
-      // 3. Construct the WhatsApp message body
-      let message = `*✨ NEW ORDER - RASHI DREAMY GIFTS ✨*\n\n`;
-      message += `*👤 Customer Details:*\n`;
-      message += `Name: ${customerName.trim()}\n`;
-      message += `Phone: ${phoneNumber.trim()}\n`;
-      message += `Address: ${address.trim()}\n\n`;
-
-      message += `*🎁 Ordered Items:*\n`;
+      // 3. Construct the WhatsApp message body to match the exact template required
+      let message = `Hello Rashi Dreamy Gifts,\n\n`;
+      message += `I would like to place an order.\n\n`;
+      message += `Customer Name:\n${customerName.trim()}\n\n`;
+      message += `Phone:\n${phoneNumber.trim()}\n\n`;
+      message += `Address:\n${address.trim()}\n\n`;
+      message += `Items:\n\n`;
       cartItems.forEach((item, index) => {
-        const itemSubtotal = item.price * item.quantity;
-        message += `${index + 1}. ${item.name} (Qty: ${item.quantity}) - ${formatCurrency(itemSubtotal)}\n`;
+        message += `${index + 1}. ${item.name} x ${item.quantity}\n`;
       });
       message += `\n`;
-
-      message += `*💳 Order Summary:*\n`;
-      message += `Items Subtotal: ${formatCurrency(itemTotal)}\n`;
-      message += `Delivery Fee: ${formatCurrency(deliveryCharge)}\n`;
-      message += `*Grand Total: ${formatCurrency(grandTotal)}*\n\n`;
-      
-      message += `Thank you for shopping with Rashi Dreamy Gifts! 💕`;
+      message += `Items Total:\n${formatCurrency(itemTotal)}\n\n`;
+      message += `Delivery Fee:\n${formatCurrency(deliveryCharge)}\n\n`;
+      message += `Grand Total:\n${formatCurrency(grandTotal)}\n\n`;
+      message += `Thank you.`;
 
       // 4. Clean target phone number
       const cleanPhone = settings.whatsappNumber.replace(/[^0-9]/g, '');

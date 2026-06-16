@@ -10,6 +10,8 @@ export const SettingsProvider = ({ children }) => {
   const [settings, setSettings] = useState({
     whatsappNumber: '+94707066217',
     deliveryCharge: 50.0,
+    storeName: 'Rashi Dreamy Gifts',
+    socialLinks: { facebook: '', instagram: '' },
   });
   const [loading, setLoading] = useState(true);
 
@@ -30,9 +32,14 @@ export const SettingsProvider = ({ children }) => {
     fetchSettings();
   }, []);
 
-  const updateGlobalSettings = async (whatsappNumber, deliveryCharge) => {
+  const updateGlobalSettings = async (whatsappNumber, deliveryCharge, storeName, socialLinks) => {
     try {
-      const res = await axios.put(`${API_URL}/api/settings`, { whatsappNumber, deliveryCharge });
+      const res = await axios.put(`${API_URL}/api/settings`, {
+        whatsappNumber,
+        deliveryCharge,
+        storeName,
+        socialLinks,
+      });
       if (res.data) {
         setSettings(res.data);
         return { success: true };

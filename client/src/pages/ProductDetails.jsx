@@ -1,10 +1,12 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import axios from 'axios';
-import { ShoppingCart, Heart, Shield, Check, Info, ArrowLeft, Plus, Minus } from 'lucide-react';
+import { ShoppingCart, Heart, Shield, Check, Info, ArrowLeft, Plus, Minus, User, Phone, MapPin, Send, X, ShoppingBag } from 'lucide-react';
 import { CartContext } from '../context/CartContext';
 import { ToastContext } from '../context/ToastContext';
+import { SettingsContext } from '../context/SettingsContext';
 import { resolveImageUrl } from '../utils/api';
+import ProductCard from '../components/ProductCard';
 
 // Get API URL from environment variable
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
@@ -13,25 +15,44 @@ const ProductDetails = () => {
   const { id } = useParams();
   const { addToCart } = useContext(CartContext);
   const { addToast } = useContext(ToastContext);
+  const { settings } = useContext(SettingsContext);
 
   const [product, setProduct] = useState(null);
+  const [relatedProducts, setRelatedProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   
   const [selectedImage, setSelectedImage] = useState('');
   const [quantity, setQuantity] = useState(1);
   const [showConfirm, setShowConfirm] = useState(false);
+  const [showDirectCheckout, setShowDirectCheckout] = useState(false);
+  const [customerName, setCustomerName] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const [address, setAddress] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
     const fetchProduct = async () => {
       setLoading(true);
       try {
         const res = await axios.get(`${API_URL}/api/products/${id}`);
-        setProduct(res.data);
-        if (res.data.images && res.data.images.length > 0) {
-          setSelectedImage(res.data.images[0]);
+        const fetchedProduct = res.data;
+        setProduct(fetchedProduct);
+        if (fetchedProduct.images && fetchedProduct.images.length > 0) {
+          setSelectedImage(fetchedProduct.images[0]);
         }
         setError(null);
+
+        // Fetch related products
+        if (fetchedProduct.category) {
+          try {
+            const relatedRes = await axios.get(`${API_URL}/api/products?category=${fetchedProduct.category._id}`);
+            const filtered = relatedRes.data.filter(p => p._id !== fetchedProduct._id);
+            setRelatedProducts(filtered.slice(0, 4));
+          } catch (relatedErr) {
+            console.error('Error fetching related products:', relatedErr.message);
+          }
+        }
       } catch (err) {
         console.error('Error fetching product details:', err.message);
         setError('Failed to load product details. It might have been removed.');
@@ -65,6 +86,78 @@ const ProductDetails = () => {
     addToCart(product, quantity);
     addToast(`${quantity} x ${product.name} added to cart!`, 'success');
     setShowConfirm(false);
+  };
+
+  const handleDirectBuy = () => {
+    setCustomerName('');
+    setPhoneNumber('');
+    setAddress('');
+    setShowDirectCheckout(true);
+  };
+
+  const handleDirectCheckoutSubmit = async (e) => {
+    e.preventDefault();
+
+    if (!customerName.trim() || !phoneNumber.trim() || !address.trim()) {
+      addToast('Please fill in all customer details', 'error');
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    const itemTotal = product.price * quantity;
+    const deliveryCharge = settings?.deliveryCharge || 50;
+    const grandTotal = itemTotal + deliveryCharge;
+
+    try {
+      // 1. Create single item order in DB
+      const orderPayload = {
+        customerName: customerName.trim(),
+        phoneNumber: phoneNumber.trim(),
+        address: address.trim(),
+        items: [
+          {
+            product: product._id,
+            name: product.name,
+            price: product.price,
+            quantity: quantity
+          }
+        ],
+        itemTotal,
+        deliveryCharge,
+        grandTotal
+      };
+
+      await axios.post(`${API_URL}/api/orders`, orderPayload);
+      addToast('Order saved! Redirecting to WhatsApp...', 'success');
+
+      // 2. Generate WhatsApp message matching the template
+      let message = `Hello Rashi Dreamy Gifts,\n\n`;
+      message += `I would like to place an order.\n\n`;
+      message += `Customer Name:\n${customerName.trim()}\n\n`;
+      message += `Phone:\n${phoneNumber.trim()}\n\n`;
+      message += `Address:\n${address.trim()}\n\n`;
+      message += `Items:\n\n`;
+      message += `1. ${product.name} x ${quantity}\n\n`;
+      message += `Items Total:\nRs. ${itemTotal.toLocaleString('en-IN')}\n\n`;
+      message += `Delivery Fee:\nRs. ${deliveryCharge.toLocaleString('en-IN')}\n\n`;
+      message += `Grand Total:\nRs. ${grandTotal.toLocaleString('en-IN')}\n\n`;
+      message += `Thank you.`;
+
+      const cleanPhone = settings?.whatsappNumber ? settings.whatsappNumber.replace(/[^0-9]/g, '') : '94707066217';
+      const encodedMsg = encodeURIComponent(message);
+      const whatsappUrl = `https://wa.me/${cleanPhone}?text=${encodedMsg}`;
+
+      setIsSubmitting(false);
+      setShowDirectCheckout(false);
+
+      // Redirect to WhatsApp
+      window.open(whatsappUrl, '_blank');
+    } catch (err) {
+      console.error('Direct buy error:', err);
+      addToast(err.response?.data?.message || 'Failed to submit order. Please check stock.', 'error');
+      setIsSubmitting(false);
+    }
   };
 
   if (loading) {
@@ -220,13 +313,20 @@ const ProductDetails = () => {
                 </div>
               </div>
 
-              <div className="flex gap-4">
+              <div className="flex flex-col sm:flex-row gap-4">
                 <button
                   onClick={handleAddToCart}
-                  className="flex-grow flex items-center justify-center gap-2 py-3.5 px-8 bg-gradient-to-r from-dreamy-lavender-600 to-dreamy-lavender-750 text-white rounded-xl font-semibold text-sm shadow-md hover:shadow-lg transition-all hover:scale-101 cursor-pointer"
+                  className="flex-1 flex items-center justify-center gap-2 py-3.5 px-6 border border-dreamy-lavender-300 hover:bg-dreamy-lavender-50/50 text-dreamy-lavender-750 rounded-xl font-semibold text-sm transition-all hover:scale-101 cursor-pointer"
                 >
                   <ShoppingCart className="w-5 h-5" />
-                  Add to Shopping Cart
+                  Add to Cart
+                </button>
+                <button
+                  onClick={handleDirectBuy}
+                  className="flex-1 flex items-center justify-center gap-2 py-3.5 px-6 bg-gradient-to-r from-dreamy-pink-500 to-dreamy-lavender-600 hover:from-dreamy-pink-600 hover:to-dreamy-lavender-750 text-white rounded-xl font-semibold text-sm shadow-md hover:shadow-lg transition-all hover:scale-101 cursor-pointer"
+                >
+                  <ShoppingBag className="w-5 h-5" />
+                  Buy Now
                 </button>
               </div>
             </div>
@@ -295,6 +395,159 @@ const ProductDetails = () => {
                 Yes, add
               </button>
             </div>
+          </div>
+        </div>
+      )}
+
+      {/* Custom Direct Purchase Checkout Modal */}
+      {showDirectCheckout && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 pointer-events-auto">
+          {/* Backdrop blur overlay */}
+          <div 
+            onClick={() => setShowDirectCheckout(false)}
+            className="fixed inset-0 bg-slate-900/50 backdrop-blur-sm transition-opacity duration-300"
+          ></div>
+
+          {/* Modal box */}
+          <div className="relative bg-white rounded-3xl p-6 sm:p-8 max-w-md w-full shadow-2xl border border-dreamy-lavender-100 animate-fade-in z-10 transform scale-100 transition-all flex flex-col gap-5 max-h-[90vh] overflow-y-auto">
+            {/* Header */}
+            <div className="flex items-center justify-between pb-3 border-b border-dreamy-lavender-100">
+              <div className="flex items-center gap-2">
+                <ShoppingBag className="w-5 h-5 text-dreamy-pink-500" />
+                <h3 className="font-serif font-bold text-slate-800 text-lg sm:text-xl">
+                  Direct Checkout
+                </h3>
+              </div>
+              <button 
+                onClick={() => setShowDirectCheckout(false)}
+                className="p-1 rounded-full hover:bg-slate-50 text-slate-400 hover:text-slate-600 transition-colors"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            {/* Product Summary Row */}
+            <div className="flex gap-4 p-3 rounded-2xl bg-slate-50 border border-slate-100 items-center">
+              <div className="w-16 h-16 rounded-xl overflow-hidden bg-white border border-dreamy-lavender-100 shadow-2xs flex-shrink-0">
+                <img 
+                  src={resolveImageUrl(selectedImage || product.images?.[0]) || 'https://via.placeholder.com/400x400.png?text=Rashi+Dreamy+Gifts'} 
+                  alt={product.name} 
+                  className="w-full h-full object-cover" 
+                />
+              </div>
+              <div className="flex-grow min-w-0">
+                <h4 className="font-serif font-bold text-slate-800 text-sm sm:text-base truncate">
+                  {product.name}
+                </h4>
+                <p className="text-xs text-slate-500 font-semibold mt-0.5">
+                  Rs. {product.price.toLocaleString('en-IN')} each
+                </p>
+              </div>
+
+              {/* Qty Display */}
+              <div className="text-xs text-slate-500 font-bold bg-white px-2.5 py-1 border border-slate-200 rounded-lg">
+                Qty: {quantity}
+              </div>
+            </div>
+
+            {/* Calculations breakdown */}
+            <div className="space-y-2 text-xs text-slate-600 p-4 bg-dreamy-pink-50/20 border border-dreamy-pink-100/20 rounded-2xl">
+              <div className="flex justify-between">
+                <span>Items Subtotal:</span>
+                <span className="font-semibold text-slate-800">Rs. {(product.price * quantity).toLocaleString('en-IN')}</span>
+              </div>
+              <div className="flex justify-between">
+                <span>Flat Delivery Fee:</span>
+                <span className="font-semibold text-slate-800">Rs. {(settings?.deliveryCharge || 50).toLocaleString('en-IN')}</span>
+              </div>
+              <hr className="border-slate-100 my-1" />
+              <div className="flex justify-between font-bold text-sm text-slate-800">
+                <span>Grand Total:</span>
+                <span className="text-dreamy-lavender-700">Rs. {(product.price * quantity + (settings?.deliveryCharge || 50)).toLocaleString('en-IN')}</span>
+              </div>
+            </div>
+
+            {/* Customer Details Form */}
+            <form onSubmit={handleDirectCheckoutSubmit} className="space-y-4">
+              {/* Name Input */}
+              <div className="flex flex-col gap-1">
+                <label className="text-[10px] font-bold text-slate-500 uppercase tracking-wider flex items-center gap-1">
+                  <User className="w-3.5 h-3.5 text-slate-400" />
+                  Full Name *
+                </label>
+                <input
+                  type="text"
+                  required
+                  placeholder="Enter recipient full name"
+                  value={customerName}
+                  onChange={(e) => setCustomerName(e.target.value)}
+                  className="p-3 text-xs sm:text-sm rounded-xl border border-slate-200 focus:outline-none focus:ring-1 focus:ring-dreamy-lavender-400 focus:border-dreamy-lavender-400 bg-slate-50/50"
+                />
+              </div>
+
+              {/* Phone Input */}
+              <div className="flex flex-col gap-1">
+                <label className="text-[10px] font-bold text-slate-500 uppercase tracking-wider flex items-center gap-1">
+                  <Phone className="w-3.5 h-3.5 text-slate-400" />
+                  Phone Number *
+                </label>
+                <input
+                  type="tel"
+                  required
+                  placeholder="Enter contact number"
+                  value={phoneNumber}
+                  onChange={(e) => setPhoneNumber(e.target.value)}
+                  className="p-3 text-xs sm:text-sm rounded-xl border border-slate-200 focus:outline-none focus:ring-1 focus:ring-dreamy-lavender-400 focus:border-dreamy-lavender-400 bg-slate-50/50"
+                />
+              </div>
+
+              {/* Address Input */}
+              <div className="flex flex-col gap-1">
+                <label className="text-[10px] font-bold text-slate-500 uppercase tracking-wider flex items-center gap-1">
+                  <MapPin className="w-3.5 h-3.5 text-slate-400" />
+                  Shipping Address *
+                </label>
+                <textarea
+                  required
+                  rows="2"
+                  placeholder="Enter complete delivery address"
+                  value={address}
+                  onChange={(e) => setAddress(e.target.value)}
+                  className="p-3 text-xs sm:text-sm rounded-xl border border-slate-200 focus:outline-none focus:ring-1 focus:ring-dreamy-lavender-400 focus:border-dreamy-lavender-400 bg-slate-50/50 resize-none"
+                ></textarea>
+              </div>
+
+              {/* Submit buttons */}
+              <div className="flex gap-3 pt-3 border-t border-slate-50">
+                <button
+                  type="button"
+                  onClick={() => setShowDirectCheckout(false)}
+                  className="w-1/3 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-600 text-xs font-bold transition-all cursor-pointer"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="w-2/3 py-2.5 rounded-xl bg-gradient-to-r from-dreamy-pink-500 to-dreamy-lavender-650 hover:from-dreamy-pink-600 hover:to-dreamy-lavender-750 text-white text-xs font-bold shadow-md hover:shadow-lg transition-all hover:scale-101 flex items-center justify-center gap-1.5 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
+                >
+                  <Send className="w-3.5 h-3.5" />
+                  {isSubmitting ? 'Ordering...' : 'Order via WhatsApp'}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}{/* Related Products Section */}
+      {relatedProducts.length > 0 && (
+        <div className="mt-16 sm:mt-24 border-t border-dreamy-lavender-100 pt-12 sm:pt-16">
+          <h2 className="font-serif font-bold text-2xl sm:text-3xl text-slate-800 mb-8 tracking-tight">
+            Related Products
+          </h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+            {relatedProducts.map((prod) => (
+              <ProductCard key={prod._id} product={prod} />
+            ))}
           </div>
         </div>
       )}

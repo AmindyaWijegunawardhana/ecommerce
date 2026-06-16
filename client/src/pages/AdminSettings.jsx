@@ -14,6 +14,9 @@ const AdminSettings = () => {
   // Shop settings fields
   const [whatsappNumber, setWhatsappNumber] = useState('');
   const [deliveryCharge, setDeliveryCharge] = useState('');
+  const [storeName, setStoreName] = useState('');
+  const [facebook, setFacebook] = useState('');
+  const [instagram, setInstagram] = useState('');
   const [isSavingSettings, setIsSavingSettings] = useState(false);
 
   // Password reset fields
@@ -26,21 +29,29 @@ const AdminSettings = () => {
     if (settings) {
       setWhatsappNumber(settings.whatsappNumber);
       setDeliveryCharge(settings.deliveryCharge.toString());
+      setStoreName(settings.storeName || 'Rashi Dreamy Gifts');
+      setFacebook(settings.socialLinks?.facebook || '');
+      setInstagram(settings.socialLinks?.instagram || '');
     }
   }, [settings]);
 
   const handleSaveSettings = async (e) => {
     e.preventDefault();
 
-    if (!whatsappNumber.trim() || !deliveryCharge) {
-      addToast('Please enter both WhatsApp number and delivery fee', 'error');
+    if (!whatsappNumber.trim() || !deliveryCharge || !storeName.trim()) {
+      addToast('Please enter WhatsApp number, delivery fee, and store name', 'error');
       return;
     }
 
     setIsSavingSettings(true);
 
     try {
-      const res = await updateGlobalSettings(whatsappNumber.trim(), Number(deliveryCharge));
+      const res = await updateGlobalSettings(
+        whatsappNumber.trim(),
+        Number(deliveryCharge),
+        storeName.trim(),
+        { facebook: facebook.trim(), instagram: instagram.trim() }
+      );
       if (res && res.success === false) {
         addToast(res.message || 'Failed to update settings', 'error');
       } else {
@@ -145,6 +156,50 @@ const AdminSettings = () => {
                 placeholder="e.g. 50"
                 value={deliveryCharge}
                 onChange={(e) => setDeliveryCharge(e.target.value)}
+                className="p-3 bg-slate-950 border border-slate-800 rounded-xl text-sm text-slate-200 focus:outline-none focus:ring-1 focus:ring-dreamy-lavender-500"
+              />
+            </div>
+
+            {/* Store Name */}
+            <div className="flex flex-col gap-1.5">
+              <label className="text-[10px] font-bold text-slate-400 uppercase tracking-wide flex items-center gap-1">
+                <Sparkles className="w-3.5 h-3.5 text-slate-500" />
+                Store Branding Name
+              </label>
+              <input
+                type="text"
+                required
+                placeholder="e.g. Rashi Dreamy Gifts"
+                value={storeName}
+                onChange={(e) => setStoreName(e.target.value)}
+                className="p-3 bg-slate-950 border border-slate-800 rounded-xl text-sm text-slate-200 focus:outline-none focus:ring-1 focus:ring-dreamy-lavender-500"
+              />
+            </div>
+
+            {/* Facebook Link */}
+            <div className="flex flex-col gap-1.5">
+              <label className="text-[10px] font-bold text-slate-400 uppercase tracking-wide">
+                Facebook Page Link
+              </label>
+              <input
+                type="url"
+                placeholder="e.g. https://facebook.com/profile"
+                value={facebook}
+                onChange={(e) => setFacebook(e.target.value)}
+                className="p-3 bg-slate-950 border border-slate-800 rounded-xl text-sm text-slate-200 focus:outline-none focus:ring-1 focus:ring-dreamy-lavender-500"
+              />
+            </div>
+
+            {/* Instagram Link */}
+            <div className="flex flex-col gap-1.5">
+              <label className="text-[10px] font-bold text-slate-400 uppercase tracking-wide">
+                Instagram Page Link
+              </label>
+              <input
+                type="url"
+                placeholder="e.g. https://instagram.com/profile"
+                value={instagram}
+                onChange={(e) => setInstagram(e.target.value)}
                 className="p-3 bg-slate-950 border border-slate-800 rounded-xl text-sm text-slate-200 focus:outline-none focus:ring-1 focus:ring-dreamy-lavender-500"
               />
             </div>

@@ -21,6 +21,7 @@ const Shop = () => {
   const [minPrice, setMinPrice] = useState(searchParams.get('minPrice') || '');
   const [maxPrice, setMaxPrice] = useState(searchParams.get('maxPrice') || '');
   const [featured, setFeatured] = useState(searchParams.get('featured') || '');
+  const [sortBy, setSortBy] = useState(searchParams.get('sortBy') || 'newest');
   
   // Mobile filter drawer visibility
   const [showMobileFilters, setShowMobileFilters] = useState(false);
@@ -69,6 +70,7 @@ const Shop = () => {
     setMinPrice(searchParams.get('minPrice') || '');
     setMaxPrice(searchParams.get('maxPrice') || '');
     setFeatured(searchParams.get('featured') || '');
+    setSortBy(searchParams.get('sortBy') || 'newest');
   }, [searchParams]);
 
   const applyFilters = () => {
@@ -78,6 +80,7 @@ const Shop = () => {
     if (minPrice) params.minPrice = minPrice;
     if (maxPrice) params.maxPrice = maxPrice;
     if (featured) params.featured = featured;
+    if (sortBy) params.sortBy = sortBy;
     
     setSearchParams(params);
     setShowMobileFilters(false);
@@ -89,8 +92,26 @@ const Shop = () => {
     setMinPrice('');
     setMaxPrice('');
     setFeatured('');
+    setSortBy('newest');
     setSearchParams({});
     setShowMobileFilters(false);
+  };
+
+  const getSortedProducts = () => {
+    const sorted = [...products];
+    if (sortBy === 'price-asc') {
+      return sorted.sort((a, b) => a.price - b.price);
+    }
+    if (sortBy === 'price-desc') {
+      return sorted.sort((a, b) => b.price - a.price);
+    }
+    if (sortBy === 'name-asc') {
+      return sorted.sort((a, b) => a.name.localeCompare(b.name));
+    }
+    if (sortBy === 'name-desc') {
+      return sorted.sort((a, b) => b.name.localeCompare(a.name));
+    }
+    return sorted.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
   };
 
   return (
@@ -208,6 +229,22 @@ const Shop = () => {
               </label>
             </div>
 
+            {/* Sort Filter */}
+            <div className="flex flex-col gap-2">
+              <label className="text-xs font-bold text-slate-500 uppercase tracking-wider">Sort By</label>
+              <select
+                value={sortBy}
+                onChange={(e) => setSortBy(e.target.value)}
+                className="w-full p-2.5 py-2 text-sm rounded-xl border border-slate-200 focus:outline-none focus:ring-1 focus:ring-dreamy-lavender-400 focus:border-dreamy-lavender-400 bg-slate-50/50"
+              >
+                <option value="newest">Newest Arrivals</option>
+                <option value="price-asc">Price: Low to High</option>
+                <option value="price-desc">Price: High to Low</option>
+                <option value="name-asc">Name: A to Z</option>
+                <option value="name-desc">Name: Z to A</option>
+              </select>
+            </div>
+
             {/* Apply Button */}
             <button
               onClick={applyFilters}
@@ -236,7 +273,7 @@ const Shop = () => {
             </div>
           ) : products.length > 0 ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {products.map((product) => (
+              {getSortedProducts().map((product) => (
                 <ProductCard key={product._id} product={product} />
               ))}
             </div>
@@ -353,6 +390,22 @@ const Shop = () => {
                 <label htmlFor="featured-mobile" className="text-sm font-medium text-slate-600 select-none">
                   Featured Items Only
                 </label>
+              </div>
+
+              {/* Sort Filter */}
+              <div className="flex flex-col gap-1.5">
+                <label className="text-xs font-bold text-slate-500 uppercase tracking-wider">Sort By</label>
+                <select
+                  value={sortBy}
+                  onChange={(e) => setSortBy(e.target.value)}
+                  className="w-full p-2.5 py-2 text-sm rounded-xl border border-slate-200 bg-slate-50 focus:outline-none focus:ring-1 focus:ring-dreamy-lavender-400"
+                >
+                  <option value="newest">Newest Arrivals</option>
+                  <option value="price-asc">Price: Low to High</option>
+                  <option value="price-desc">Price: High to Low</option>
+                  <option value="name-asc">Name: A to Z</option>
+                  <option value="name-desc">Name: Z to A</option>
+                </select>
               </div>
             </div>
 

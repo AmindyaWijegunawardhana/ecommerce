@@ -102,15 +102,15 @@ const AdminDashboard = () => {
       {/* Stats Cards Grid */}
       {stats && (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {/* Card 1: Revenue */}
+          {/* Card 1: Total Products */}
           <div className="p-6 rounded-2xl bg-slate-900 border border-slate-800 flex items-center justify-between group shadow-sm">
             <div className="space-y-2">
-              <p className="text-xs font-semibold text-slate-500 uppercase tracking-widest">Total Sales</p>
-              <h3 className="text-2xl font-bold text-white tracking-tight">{formatCurrency(stats.totalSales)}</h3>
-              <p className="text-[10px] text-emerald-400">Delivered Orders only</p>
+              <p className="text-xs font-semibold text-slate-500 uppercase tracking-widest">Total Products</p>
+              <h3 className="text-2xl font-bold text-white tracking-tight">{stats.totalProducts}</h3>
+              <p className="text-[10px] text-slate-450">Items in catalog</p>
             </div>
-            <div className="p-3.5 rounded-xl bg-emerald-500/10 text-emerald-400">
-              <TrendingUp className="w-6 h-6" />
+            <div className="p-3.5 rounded-xl bg-indigo-500/10 text-indigo-400">
+              <Gift className="w-6 h-6" />
             </div>
           </div>
 
@@ -119,7 +119,7 @@ const AdminDashboard = () => {
             <div className="space-y-2">
               <p className="text-xs font-semibold text-slate-500 uppercase tracking-widest">Total Orders</p>
               <h3 className="text-2xl font-bold text-white tracking-tight">{stats.totalOrders}</h3>
-              <p className="text-[10px] text-slate-400">Received orders count</p>
+              <p className="text-[10px] text-slate-455">Customer checkout count</p>
             </div>
             <div className="p-3.5 rounded-xl bg-dreamy-lavender-550/10 text-dreamy-lavender-400">
               <ShoppingBag className="w-6 h-6" />
@@ -138,15 +138,15 @@ const AdminDashboard = () => {
             </div>
           </div>
 
-          {/* Card 4: Total Products */}
+          {/* Card 4: Completed Orders */}
           <div className="p-6 rounded-2xl bg-slate-900 border border-slate-800 flex items-center justify-between group shadow-sm">
             <div className="space-y-2">
-              <p className="text-xs font-semibold text-slate-500 uppercase tracking-widest">Products</p>
-              <h3 className="text-2xl font-bold text-white tracking-tight">{stats.totalProducts}</h3>
-              <p className="text-[10px] text-slate-400">Total items in catalog</p>
+              <p className="text-xs font-semibold text-slate-500 uppercase tracking-widest">Completed Orders</p>
+              <h3 className="text-2xl font-bold text-white tracking-tight">{stats.completedOrders}</h3>
+              <p className="text-[10px] text-emerald-400 font-semibold">Sales: {formatCurrency(stats.totalSales)}</p>
             </div>
-            <div className="p-3.5 rounded-xl bg-indigo-500/10 text-indigo-400">
-              <Gift className="w-6 h-6" />
+            <div className="p-3.5 rounded-xl bg-emerald-500/10 text-emerald-400">
+              <CheckCircle className="w-6 h-6" />
             </div>
           </div>
         </div>

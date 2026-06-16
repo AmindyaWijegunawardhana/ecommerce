@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import { Gift, Sparkles, Heart, Clock, ArrowRight } from 'lucide-react';
+import { Gift, Sparkles, Heart, Clock, ArrowRight, MessageSquare, Star, Award, ShieldCheck, Truck } from 'lucide-react';
 import ProductCard from '../components/ProductCard';
+import { SettingsContext } from '../context/SettingsContext';
 
 // Get API URL from environment variable
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
@@ -30,24 +31,33 @@ const Home = () => {
     fetchHomeData();
   }, []);
 
+  const { settings } = useContext(SettingsContext);
+
+  const cleanPhone = settings?.whatsappNumber ? settings.whatsappNumber.replace(/[^0-9]/g, '') : '';
+  const waUrl = `https://wa.me/${cleanPhone || '94707066217'}?text=Hello%20Rashi%20Dreamy%20Gifts%2C%20I%20would%20like%20to%20inquire%20about%20your%20gifts%21`;
+
   const valueProps = [
     {
-      icon: <Sparkles className="w-6 h-6 text-dreamy-gold" />,
-      title: 'Handcrafted With Love',
-      desc: 'Each piece is hand-selected or custom-made to ensure it carries a special spark.'
+      icon: <Award className="w-6 h-6 text-dreamy-gold" />,
+      title: 'Quality Products',
+      desc: 'We curate premium items, exquisite hand-picked hampers, and pristine gifts ensuring perfection.'
     },
     {
       icon: <Heart className="w-6 h-6 text-dreamy-pink-500" />,
-      title: 'Personalized Touch',
-      desc: 'Customize products with names, photos, or customized letters for your loved ones.'
+      title: 'Affordable Prices',
+      desc: 'Thoughtfully priced gift combinations to celebrate milestones without stretching your budget.'
     },
     {
-      icon: <Clock className="w-6 h-6 text-dreamy-lavender-500" />,
-      title: 'Timely Coordination',
-      desc: 'Direct communication via WhatsApp ensures your specifications are met on time.'
+      icon: <Truck className="w-6 h-6 text-dreamy-lavender-500" />,
+      title: 'Islandwide Delivery',
+      desc: 'Reliable and fast shipping to deliver heartwarming surprises directly to any address.'
+    },
+    {
+      icon: <ShieldCheck className="w-6 h-6 text-emerald-500" />,
+      title: 'Trusted Service',
+      desc: 'Committed support and easy direct-to-chat coordinates keeping your orders safe.'
     }
   ];
-
 
   return (
     <div className="space-y-16 sm:space-y-24 pb-16">
@@ -62,12 +72,12 @@ const Home = () => {
             </span>
 
             <h1 className="text-4xl sm:text-6xl font-extrabold tracking-tight text-slate-800 leading-[1.15]">
-              Rashi Dreamy Gifts <br className="hidden sm:inline" />
-              <span className="gold-text-gradient italic">Dreamy Celebration</span>
+              Dreamy Gifts for <br className="hidden sm:inline" />
+              <span className="gold-text-gradient italic">Every Special Moment</span>
             </h1>
 
             <p className="text-base sm:text-lg text-slate-600 leading-relaxed max-w-xl mx-auto font-light">
-              Explore our collection of custom curated gifts, fancy hampers, and beautiful accessories tailored to convey your deepest sentiments.
+              Beautiful gifts crafted to create unforgettable memories.
             </p>
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -75,15 +85,18 @@ const Home = () => {
                 to="/shop"
                 className="w-full sm:w-auto flex items-center justify-center gap-2 py-3.5 px-8 rounded-xl text-sm font-semibold text-white bg-gradient-to-r from-dreamy-lavender-600 to-dreamy-lavender-700 shadow-md hover:shadow-lg hover:scale-102 transition-all cursor-pointer"
               >
-                Shop Collection
+                Shop Now
                 <ArrowRight className="w-4 h-4" />
               </Link>
-              <Link
-                to="/about"
-                className="w-full sm:w-auto flex items-center justify-center py-3.5 px-8 rounded-xl text-sm font-medium text-slate-700 bg-white border border-slate-200 hover:bg-slate-50 transition-colors shadow-xs"
+              <a
+                href={waUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="w-full sm:w-auto flex items-center justify-center gap-2 py-3.5 px-8 rounded-xl text-sm font-medium text-slate-700 bg-white border border-slate-200 hover:bg-slate-50 transition-colors shadow-xs"
               >
-                Our Story
-              </Link>
+                <MessageSquare className="w-4 h-4 text-emerald-500" />
+                Contact on WhatsApp
+              </a>
             </div>
           </div>
         </div>
@@ -177,18 +190,74 @@ const Home = () => {
           <h2 className="text-2xl sm:text-4xl font-bold text-slate-800 mt-1">Why Choose Us?</h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {valueProps.map((prop, i) => (
             <div
               key={i}
-              className="p-6 rounded-2xl bg-white border border-dreamy-lavender-100/60 shadow-xs hover:border-dreamy-pink-200 transition-colors flex flex-col gap-4"
+              className="p-6 rounded-2xl bg-white border border-dreamy-lavender-100/60 shadow-xs hover:border-dreamy-pink-200 transition-all hover:-translate-y-1 hover:shadow-md duration-300 flex flex-col gap-4"
             >
               <div className="w-12 h-12 rounded-xl bg-slate-50 flex items-center justify-center flex-shrink-0 shadow-inner">
                 {prop.icon}
               </div>
               <div>
                 <h3 className="font-serif font-bold text-slate-800 text-lg mb-2">{prop.title}</h3>
-                <p className="text-sm text-slate-500 leading-relaxed">{prop.desc}</p>
+                <p className="text-xs text-slate-500 leading-relaxed font-light">{prop.desc}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* 5. Testimonials Section */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div className="text-center max-w-xl mx-auto mb-12 sm:mb-16">
+          <span className="text-xs uppercase tracking-widest text-dreamy-lavender-600 font-bold">Reviews</span>
+          <h2 className="text-2xl sm:text-4xl font-bold text-slate-800 mt-1">What Our Customers Say</h2>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {[
+            {
+              name: 'Amelia Perera',
+              role: 'Verified Customer',
+              text: 'The Royal Lavender Hamper was absolutely stunning! The packaging was so premium, and my sister loved the customized greeting card.',
+              stars: 5
+            },
+            {
+              name: 'Dilan Silva',
+              role: 'Verified Customer',
+              text: 'Superb customer service! The direct WhatsApp coordination made it so easy to explain my custom requirements. Highly recommended!',
+              stars: 5
+            },
+            {
+              name: 'Shenali Fernando',
+              role: 'Verified Customer',
+              text: 'Outstanding delivery. I ordered flowers and a soft toy from Colombo, and they arrived perfectly fresh and clean. Truly trusted service.',
+              stars: 5
+            }
+          ].map((test, idx) => (
+            <div
+              key={idx}
+              className="p-6 rounded-2xl bg-white border border-dreamy-lavender-100/60 shadow-xs relative flex flex-col justify-between gap-6"
+            >
+              <div className="space-y-3">
+                <div className="flex gap-0.5 text-dreamy-gold">
+                  {[...Array(test.stars)].map((_, i) => (
+                    <Star key={i} className="w-4 h-4 fill-dreamy-gold" />
+                  ))}
+                </div>
+                <p className="text-sm italic text-slate-600 font-light leading-relaxed">
+                  "{test.text}"
+                </p>
+              </div>
+              <div className="flex items-center gap-3 pt-3 border-t border-slate-50">
+                <div className="w-8 h-8 rounded-full bg-dreamy-pink-100 flex items-center justify-center text-dreamy-pink-600 text-xs font-bold font-sans uppercase">
+                  {test.name.substring(0, 2)}
+                </div>
+                <div>
+                  <h4 className="font-serif font-bold text-slate-800 text-sm">{test.name}</h4>
+                  <p className="text-[10px] text-slate-400 font-sans">{test.role}</p>
+                </div>
               </div>
             </div>
           ))}
