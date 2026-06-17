@@ -97,6 +97,46 @@ const Shop = () => {
     setShowMobileFilters(false);
   };
 
+  const handleCategorySelect = (catName) => {
+    setCategory(catName);
+    const params = {};
+    if (search) params.search = search;
+    if (catName) params.category = catName;
+    if (minPrice) params.minPrice = minPrice;
+    if (maxPrice) params.maxPrice = maxPrice;
+    if (featured) params.featured = featured;
+    if (sortBy) params.sortBy = sortBy;
+    
+    setSearchParams(params);
+  };
+
+  const handleFeaturedToggle = (checked) => {
+    const val = checked ? 'true' : '';
+    setFeatured(val);
+    const params = {};
+    if (search) params.search = search;
+    if (category) params.category = category;
+    if (minPrice) params.minPrice = minPrice;
+    if (maxPrice) params.maxPrice = maxPrice;
+    if (val) params.featured = val;
+    if (sortBy) params.sortBy = sortBy;
+    
+    setSearchParams(params);
+  };
+
+  const handleSortChange = (value) => {
+    setSortBy(value);
+    const params = {};
+    if (search) params.search = search;
+    if (category) params.category = category;
+    if (minPrice) params.minPrice = minPrice;
+    if (maxPrice) params.maxPrice = maxPrice;
+    if (featured) params.featured = featured;
+    if (value) params.sortBy = value;
+    
+    setSearchParams(params);
+  };
+
   const getSortedProducts = () => {
     const sorted = [...products];
     if (sortBy === 'price-asc') {
@@ -168,7 +208,7 @@ const Shop = () => {
               <label className="text-xs font-bold text-slate-500 uppercase tracking-wider">Category</label>
               <div className="flex flex-col gap-2.5 max-h-48 overflow-y-auto pr-1">
                 <button
-                  onClick={() => setCategory('')}
+                  onClick={() => handleCategorySelect('')}
                   className={`text-left text-sm py-1.5 px-2.5 rounded-lg transition-colors flex-shrink-0 ${
                     category === ''
                       ? 'bg-dreamy-lavender-50 text-dreamy-lavender-800 font-semibold'
@@ -180,7 +220,7 @@ const Shop = () => {
                 {categories.map((cat) => (
                   <button
                     key={cat._id}
-                    onClick={() => setCategory(cat.name)}
+                    onClick={() => handleCategorySelect(cat.name)}
                     className={`text-left text-sm py-1.5 px-2.5 rounded-lg transition-colors truncate flex-shrink-0 ${
                       category === cat.name
                         ? 'bg-dreamy-lavender-50 text-dreamy-lavender-800 font-semibold'
@@ -221,7 +261,7 @@ const Shop = () => {
                 type="checkbox"
                 id="featured-desktop"
                 checked={featured === 'true'}
-                onChange={(e) => setFeatured(e.target.checked ? 'true' : '')}
+                onChange={(e) => handleFeaturedToggle(e.target.checked)}
                 className="rounded border-slate-300 text-dreamy-lavender-600 focus:ring-dreamy-lavender-400"
               />
               <label htmlFor="featured-desktop" className="text-sm font-medium text-slate-600 cursor-pointer select-none">
@@ -234,7 +274,7 @@ const Shop = () => {
               <label className="text-xs font-bold text-slate-500 uppercase tracking-wider">Sort By</label>
               <select
                 value={sortBy}
-                onChange={(e) => setSortBy(e.target.value)}
+                onChange={(e) => handleSortChange(e.target.value)}
                 className="w-full p-2.5 py-2 text-sm rounded-xl border border-slate-200 focus:outline-none focus:ring-1 focus:ring-dreamy-lavender-400 focus:border-dreamy-lavender-400 bg-slate-50/50"
               >
                 <option value="newest">Newest Arrivals</option>
