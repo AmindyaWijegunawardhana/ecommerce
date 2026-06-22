@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
+import { createPortal } from 'react-dom';
 import { useParams, Link } from 'react-router-dom';
 import axios from 'axios';
 import { ShoppingCart, Heart, Shield, Check, Info, ArrowLeft, Plus, Minus, User, Phone, MapPin, Send, X, ShoppingBag } from 'lucide-react';
@@ -355,8 +356,8 @@ const ProductDetails = () => {
       </div>
 
       {/* Custom Add to Cart Confirmation Modal */}
-      {showConfirm && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 pointer-events-auto">
+      {showConfirm && createPortal(
+        <div className="fixed inset-0 z-50 flex items-center justify-start sm:justify-center p-4 pointer-events-auto">
           {/* Backdrop blur overlay */}
           <div 
             onClick={() => setShowConfirm(false)}
@@ -396,12 +397,13 @@ const ProductDetails = () => {
               </button>
             </div>
           </div>
-        </div>
+        </div>,
+        document.body
       )}
 
       {/* Custom Direct Purchase Checkout Modal */}
-      {showDirectCheckout && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 pointer-events-auto">
+      {showDirectCheckout && createPortal(
+        <div className="fixed inset-0 z-50 flex items-center justify-start sm:justify-center p-4 pointer-events-auto">
           {/* Backdrop blur overlay */}
           <div 
             onClick={() => setShowDirectCheckout(false)}
@@ -537,7 +539,8 @@ const ProductDetails = () => {
               </div>
             </form>
           </div>
-        </div>
+        </div>,
+        document.body
       )}{/* Related Products Section */}
       {relatedProducts.length > 0 && (
         <div className="mt-16 sm:mt-24 border-t border-dreamy-lavender-100 pt-12 sm:pt-16">

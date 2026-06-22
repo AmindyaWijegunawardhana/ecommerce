@@ -1,4 +1,5 @@
 import React, { useState, useContext } from 'react';
+import { createPortal } from 'react-dom';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { ShoppingCart, Eye, User, Phone, MapPin, Send, X, CreditCard, Minus, Plus, ShoppingBag } from 'lucide-react';
@@ -222,8 +223,8 @@ const ProductCard = ({ product }) => {
       </div>
 
       {/* Custom Add to Cart Confirmation Modal */}
-      {showConfirm && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 pointer-events-auto">
+      {showConfirm && createPortal(
+        <div className="fixed inset-0 z-50 flex items-center justify-start sm:justify-center p-4 pointer-events-auto">
           {/* Backdrop blur overlay */}
           <div 
             onClick={() => setShowConfirm(false)}
@@ -263,12 +264,13 @@ const ProductCard = ({ product }) => {
               </button>
             </div>
           </div>
-        </div>
+        </div>,
+        document.body
       )}
 
       {/* Custom Direct Purchase Checkout Modal */}
-      {showDirectCheckout && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 pointer-events-auto">
+      {showDirectCheckout && createPortal(
+        <div className="fixed inset-0 z-50 flex items-center justify-start sm:justify-center p-4 pointer-events-auto">
           {/* Backdrop blur overlay */}
           <div 
             onClick={() => setShowDirectCheckout(false)}
@@ -424,7 +426,8 @@ const ProductCard = ({ product }) => {
               </div>
             </form>
           </div>
-        </div>
+        </div>,
+        document.body
       )}
     </div>
   );
