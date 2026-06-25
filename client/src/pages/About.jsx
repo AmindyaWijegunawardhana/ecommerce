@@ -165,7 +165,7 @@ const About = () => {
               </div>
               <div>
                 <h4 className="font-serif font-bold text-slate-800 text-base mb-1">Our Workshop</h4>
-                <p className="text-xs text-slate-500">{settings?.storeName || 'Rashi Dreamy Gifts'}, Main Bazar Road, City Center, India</p>
+                <p className="text-xs text-slate-500">{settings?.storeName || 'Rashi Dreamy Gifts'}, Embilipitiya, Sri Lanka</p>
                 <p className="text-[10px] text-slate-400">Visit by appointment</p>
               </div>
             </div>

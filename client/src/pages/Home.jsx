@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import { Gift, Sparkles, Heart, Clock, ArrowRight, MessageSquare, Star, Award, ShieldCheck, Truck } from 'lucide-react';
+import { Gift, Sparkles, Heart, Clock, ArrowRight, MessageSquare, Award, ShieldCheck, Truck } from 'lucide-react';
 import ProductCard from '../components/ProductCard';
 import { SettingsContext } from '../context/SettingsContext';
 
@@ -208,61 +208,6 @@ const Home = () => {
         </div>
       </section>
 
-      {/* 5. Testimonials Section */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="text-center max-w-xl mx-auto mb-12 sm:mb-16">
-          <span className="text-xs uppercase tracking-widest text-dreamy-lavender-600 font-bold">Reviews</span>
-          <h2 className="text-2xl sm:text-4xl font-bold text-slate-800 mt-1">What Our Customers Say</h2>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {[
-            {
-              name: 'Amelia Perera',
-              role: 'Verified Customer',
-              text: 'The Royal Lavender Hamper was absolutely stunning! The packaging was so premium, and my sister loved the customized greeting card.',
-              stars: 5
-            },
-            {
-              name: 'Dilan Silva',
-              role: 'Verified Customer',
-              text: 'Superb customer service! The direct WhatsApp coordination made it so easy to explain my custom requirements. Highly recommended!',
-              stars: 5
-            },
-            {
-              name: 'Shenali Fernando',
-              role: 'Verified Customer',
-              text: 'Outstanding delivery. I ordered flowers and a soft toy from Colombo, and they arrived perfectly fresh and clean. Truly trusted service.',
-              stars: 5
-            }
-          ].map((test, idx) => (
-            <div
-              key={idx}
-              className="p-6 rounded-2xl bg-white border border-dreamy-lavender-100/60 shadow-xs relative flex flex-col justify-between gap-6"
-            >
-              <div className="space-y-3">
-                <div className="flex gap-0.5 text-dreamy-gold">
-                  {[...Array(test.stars)].map((_, i) => (
-                    <Star key={i} className="w-4 h-4 fill-dreamy-gold" />
-                  ))}
-                </div>
-                <p className="text-sm italic text-slate-600 font-light leading-relaxed">
-                  "{test.text}"
-                </p>
-              </div>
-              <div className="flex items-center gap-3 pt-3 border-t border-slate-50">
-                <div className="w-8 h-8 rounded-full bg-dreamy-pink-100 flex items-center justify-center text-dreamy-pink-600 text-xs font-bold font-sans uppercase">
-                  {test.name.substring(0, 2)}
-                </div>
-                <div>
-                  <h4 className="font-serif font-bold text-slate-800 text-sm">{test.name}</h4>
-                  <p className="text-[10px] text-slate-400 font-sans">{test.role}</p>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
 
     </div>
   );

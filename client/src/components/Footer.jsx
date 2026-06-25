@@ -74,7 +74,7 @@ const Footer = () => {
             <div className="flex flex-col gap-3 text-sm">
               <div className="flex items-start gap-2.5">
                 <MapPin className="w-4.5 h-4.5 text-dreamy-lavender-500 mt-0.5 flex-shrink-0" />
-                <span>{settings?.storeName || 'Rashi Dreamy Gifts'}, Main Bazar Road, City Center, India</span>
+                <span>{settings?.storeName || 'Rashi Dreamy Gifts'}, Embilipitiya, Sri Lanka</span>
               </div>
               <div className="flex items-center gap-2.5">
                 <Phone className="w-4.5 h-4.5 text-dreamy-lavender-500 flex-shrink-0" />
