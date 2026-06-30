@@ -221,7 +221,7 @@ const Shop = () => {
                   <button
                     key={cat._id}
                     onClick={() => handleCategorySelect(cat.name)}
-                    className={`text-left text-sm py-1.5 px-2.5 rounded-lg transition-colors truncate flex-shrink-0 ${
+                    className={`text-left text-sm py-1.5 px-2.5 rounded-lg transition-colors flex-shrink-0 ${
                       category === cat.name
                         ? 'bg-dreamy-lavender-50 text-dreamy-lavender-800 font-semibold'
                         : 'text-slate-600 hover:bg-slate-50'
@@ -386,7 +386,7 @@ const Shop = () => {
                     <button
                       key={cat._id}
                       onClick={() => setCategory(cat.name)}
-                      className={`text-left text-sm py-2 px-3 rounded-lg transition-colors truncate flex-shrink-0 ${
+                      className={`text-left text-sm py-2 px-3 rounded-lg transition-colors flex-shrink-0 ${
                         category === cat.name ? 'bg-dreamy-lavender-50 text-dreamy-lavender-800 font-semibold' : 'text-slate-600'
                       }`}
                     >
